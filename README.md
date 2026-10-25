@@ -1,6 +1,6 @@
-# 台股波段漲跌天數與累積漲跌幅試算分析工具
-# Taiwan Stock Duration & Percentage Analyzer
-### 整合大盤加權指數 (TAIEX)、扣除五大權值股動態分析、GitHub Pages 部署與 Actions 自動更新排程
+# 台美股波段漲跌天數與累積漲跌幅試算分析工具
+# Taiwan & US Stock Duration & Percentage Analyzer
+### 整合大盤加權指數 (TAIEX)、扣除五大權值股動態分析、美股與全球 ETF (VT/VTI/BND/TSM/NVDA/GOOGL)、GitHub Pages 部署與 Actions 自動更新排程
 
 [![Generative UI Compliant](https://img.shields.io/badge/Generative_UI-Compliant-success?style=flat-square)](https://github.com)
 [![Offline Ready](https://img.shields.io/badge/Dependencies-Zero_Standalone-blue?style=flat-square)](https://github.com)
@@ -9,7 +9,7 @@
 [![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub_Pages-blue?style=flat-square&logo=github)](https://pages.github.com/)
 [![Auto Updater](https://img.shields.io/badge/GitHub_Actions-Auto_Update_Daily-green?style=flat-square&logo=githubactions)](https://github.com/features/actions)
 
-本工具為依據 **Generative UI & Production WebApp 規範** 打造的單檔案、零外部相依、離線可執行的互動式網頁應用程式。專為台灣股市（台股）投資人與分析者設計，預設涵蓋權值雙雄 **台積電 (TSMC 2330.TW)** 與 **聯發科 (MediaTek 2454.TW)**，擴充電子權值旗艦（鴻海 2317、廣達 2382、台達電 2308），全面整合 **臺灣加權指數（大盤 TAIEX）** 與 **「扣除五大權值股後之大盤變化（TAIEX Ex-Big 5）」**，並附帶 **GitHub Actions 每日定時盤後自動更新與 GitHub Pages 一鍵發佈工作流**！
+本工具為依據 **Generative UI & Production WebApp 規範** 打造的單檔案、零外部相依、離線可執行的互動式網頁應用程式。同時涵蓋 **台股五大權值股**（台積電 2330、聯發科 2454、鴻海 2317、廣達 2382、台達電 2308）、**臺灣加權指數（大盤 TAIEX）與「扣除五大權值股後之大盤變化（TAIEX Ex-Big 5）」**，以及 **6 檔美股與全球核心 ETF（VT、VTI、BND、TSM 台積電 ADR、NVDA 輝達、GOOGL Google）**，並附帶 **GitHub Actions 每日定時盤後自動更新與 GitHub Pages 一鍵發佈工作流**！
 
 ---
 
@@ -152,15 +152,26 @@ git push -u origin main
 
 ## 4. 支援標的與大盤權重 / Supported Symbols & Market Weights
 
-| 標的代號 | 中文名稱 | 英文名稱 | 大盤權重 | 代表色 | 預設狀態 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **TAIEX** | **加權指數 (大盤)** | **TAIEX Index** | **100.0%** | `#f43f5e` | 基準指標 |
-| **EX_BIG5** | **扣除五大後大盤** | **TAIEX Ex-Big 5** | **55.0%** | `#06b6d4` | 基準指標 |
-| **2330** | **台積電** | **TSMC** | **34.5%** | `#ef4444` | **預設啟用** |
-| **2454** | **聯發科** | **MediaTek** | **3.5%** | `#38bdf8` | **預設啟用** |
-| **2317** | **鴻海** | **Foxconn** | **4.2%** | `#a855f7` | 可選標的 |
-| **2382** | **廣達** | **Quanta** | **1.5%** | `#f59e0b` | 可選標的 |
-| **2308** | **台達電** | **Delta** | **1.3%** | `#10b981` | 可選標的 |
+### 🇹🇼 台股與大盤指數 (Taiwan Stocks & Benchmarks)
+| 標的代號 | 市場/幣別 | 中文名稱 | 英文名稱 | 大盤權重 | 代表色 | 預設狀態 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **TAIEX** | TW (Pts) | **加權指數 (大盤)** | **TAIEX Index** | **100.0%** | `#f43f5e` | 基準指標 |
+| **EX_BIG5** | TW (Pts) | **扣除五大後大盤** | **TAIEX Ex-Big 5** | **55.0%** | `#06b6d4` | 基準指標 |
+| **2330** | TW (TWD) | **台積電** | **TSMC** | **34.5%** | `#ef4444` | **預設啟用** |
+| **2454** | TW (TWD) | **聯發科** | **MediaTek** | **3.5%** | `#38bdf8` | **預設啟用** |
+| **2317** | TW (TWD) | **鴻海** | **Foxconn** | **4.2%** | `#a855f7` | 可選標的 |
+| **2382** | TW (TWD) | **廣達** | **Quanta** | **1.5%** | `#f59e0b` | 可選標的 |
+| **2308** | TW (TWD) | **台達電** | **Delta** | **1.3%** | `#10b981` | 可選標的 |
+
+### 🇺🇸 美股與全球 ETF (US Stocks & Global ETFs)
+| 標的代號 | 市場/幣別 | 中文名稱 | 英文名稱 | 類別說明 | 代表色 | 預設狀態 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **VT** | US (USD) | **VT (全球股票ETF)** | **Vanguard Total World ETF** | 全球股票指數 ETF | `#0ea5e9` | **預設啟用** |
+| **VTI** | US (USD) | **VTI (全美股票ETF)** | **Vanguard Total Stock Market ETF** | 整體美國股市 ETF | `#6366f1` | **預設啟用** |
+| **BND** | US (USD) | **BND (總體債券ETF)** | **Vanguard Total Bond Market ETF** | 美國投資級總體債券 ETF | `#14b8a6` | **預設啟用** |
+| **TSM** | US (USD) | **台積電 ADR** | **TSMC ADR** | 晶圓代工龍頭美國存託憑證 | `#fb7185` | **預設啟用** |
+| **NVDA** | US (USD) | **輝達 (NVIDIA)** | **NVIDIA** | AI 算力與 GPU 加速運算霸主 | `#84cc16` | **預設啟用** |
+| **GOOGL** | US (USD) | **Google (Alphabet)** | **Google (Alphabet)** | 雲端、搜尋與 Gemini AI 巨頭 | `#eab308` | **預設啟用** |
 
 ---
 

@@ -1,8 +1,9 @@
 """
-Taiwan Stock Data Auto-Updater & Injector (台股歷史與即時報價自動更新/注入器)
+Taiwan & US Stock Data Auto-Updater & Injector (台美股歷史與即時報價自動更新/注入器)
 --------------------------------------------------------------------------
 Zero external pip dependencies (Standard library only).
 Fetches from official TWSE Open Data and Yahoo Finance API.
+- Supports Taiwan Big 5 & TAIEX + US Stocks/ETFs (VT, VTI, BND, TSM, NVDA, GOOGL)
 - Generates 'latest_market_data.json'
 - Can inject directly into 'index.html' via `python update_prices.py --inject`
 """
@@ -16,12 +17,20 @@ import sys
 import re
 
 SYMBOLS = {
-    "2330": {"yahoo": "2330.TW", "nameZh": "台積電", "nameEn": "TSMC", "weight": 0.345, "color": "#ef4444", "isDefault": True},
-    "2454": {"yahoo": "2454.TW", "nameZh": "聯發科", "nameEn": "MediaTek", "weight": 0.035, "color": "#38bdf8", "isDefault": True},
-    "2317": {"yahoo": "2317.TW", "nameZh": "鴻海", "nameEn": "Foxconn", "weight": 0.042, "color": "#a855f7", "isDefault": False},
-    "2382": {"yahoo": "2382.TW", "nameZh": "廣達", "nameEn": "Quanta", "weight": 0.015, "color": "#f59e0b", "isDefault": False},
-    "2308": {"yahoo": "2308.TW", "nameZh": "台達電", "nameEn": "Delta", "weight": 0.013, "color": "#10b981", "isDefault": False},
-    "TAIEX": {"yahoo": "%5ETWII", "nameZh": "加權指數 (大盤)", "nameEn": "TAIEX", "weight": 1.0, "color": "#f43f5e", "isBenchmark": True, "isDefault": False}
+    # Taiwan Stocks & Benchmarks
+    "2330": {"yahoo": "2330.TW", "market": "TW", "currency": "TWD", "nameZh": "台積電", "nameEn": "TSMC", "weight": 0.345, "color": "#ef4444", "isDefault": True},
+    "2454": {"yahoo": "2454.TW", "market": "TW", "currency": "TWD", "nameZh": "聯發科", "nameEn": "MediaTek", "weight": 0.035, "color": "#38bdf8", "isDefault": True},
+    "2317": {"yahoo": "2317.TW", "market": "TW", "currency": "TWD", "nameZh": "鴻海", "nameEn": "Foxconn", "weight": 0.042, "color": "#a855f7", "isDefault": False},
+    "2382": {"yahoo": "2382.TW", "market": "TW", "currency": "TWD", "nameZh": "廣達", "nameEn": "Quanta", "weight": 0.015, "color": "#f59e0b", "isDefault": False},
+    "2308": {"yahoo": "2308.TW", "market": "TW", "currency": "TWD", "nameZh": "台達電", "nameEn": "Delta", "weight": 0.013, "color": "#10b981", "isDefault": False},
+    "TAIEX": {"yahoo": "%5ETWII", "market": "TW", "currency": "Pts", "nameZh": "加權指數 (大盤)", "nameEn": "TAIEX", "weight": 1.0, "color": "#f43f5e", "isBenchmark": True, "isDefault": False},
+    # US Stocks & Global ETFs
+    "VT": {"yahoo": "VT", "market": "US", "currency": "USD", "nameZh": "VT (全球股票ETF)", "nameEn": "Vanguard Total World ETF", "weight": 0.0, "color": "#0ea5e9", "isDefault": True},
+    "VTI": {"yahoo": "VTI", "market": "US", "currency": "USD", "nameZh": "VTI (全美股票ETF)", "nameEn": "Vanguard Total Stock Market ETF", "weight": 0.0, "color": "#6366f1", "isDefault": True},
+    "BND": {"yahoo": "BND", "market": "US", "currency": "USD", "nameZh": "BND (總體債券ETF)", "nameEn": "Vanguard Total Bond Market ETF", "weight": 0.0, "color": "#14b8a6", "isDefault": True},
+    "TSM": {"yahoo": "TSM", "market": "US", "currency": "USD", "nameZh": "台積電 ADR", "nameEn": "TSMC ADR", "weight": 0.0, "color": "#fb7185", "isDefault": True},
+    "NVDA": {"yahoo": "NVDA", "market": "US", "currency": "USD", "nameZh": "輝達 (NVIDIA)", "nameEn": "NVIDIA", "weight": 0.0, "color": "#84cc16", "isDefault": True},
+    "GOOGL": {"yahoo": "GOOGL", "market": "US", "currency": "USD", "nameZh": "Google (Alphabet)", "nameEn": "Google (Alphabet)", "weight": 0.0, "color": "#eab308", "isDefault": True}
 }
 
 HEADERS = {
@@ -66,7 +75,7 @@ def fetch_yahoo_history(symbol_yahoo, range_str="1y"):
 def main():
     inject_mode = "--inject" in sys.argv
     print("=" * 65)
-    print("  Taiwan Stock Auto-Updater (台股歷史行情自動更新器)")
+    print("  TW & US Stock Auto-Updater (台美股歷史行情自動更新器)")
     print(f"  Execution Time: {datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"  Mode: {'Direct HTML Injection (--inject)' if inject_mode else 'Generate latest_market_data.json'}")
     print("=" * 65)
@@ -78,6 +87,8 @@ def main():
         if series:
             dataset[code] = {
                 "code": code,
+                "market": info.get("market", "TW"),
+                "currency": info.get("currency", "TWD"),
                 "nameZh": info["nameZh"],
                 "nameEn": info["nameEn"],
                 "color": info.get("color", "#94a3b8"),
@@ -108,6 +119,18 @@ def main():
 
         sync_stamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M')
         html = re.sub(r'data-last-sync="[^"]*"', f'data-last-sync="{sync_stamp}"', html)
+
+        compact_data = {}
+        for k, v in dataset.items():
+            compact_data[k] = [{"date": d["date"], "close": d["close"], "high": d["high"], "low": d["low"]} for d in v["data"]]
+
+        injected_js = f"/* __MARKET_DATA_START__ */\n    const EMBEDDED_MARKET_SERIES = {json.dumps(compact_data, ensure_ascii=False, separators=(',', ':'))};\n    /* __MARKET_DATA_END__ */"
+        html = re.sub(
+            r'/\* __MARKET_DATA_START__ \*/.*?/\* __MARKET_DATA_END__ \*/',
+            lambda _: injected_js,
+            html,
+            flags=re.DOTALL
+        )
 
         with open("index.html", "w", encoding="utf-8") as f:
             f.write(html)

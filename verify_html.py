@@ -21,6 +21,12 @@ checks = [
     ('id="episodesTable"', 'Streak episodes table'),
     ('2330', 'TSMC stock code'),
     ('2454', 'MediaTek stock code'),
+    ('VT', 'Vanguard Total World ETF code'),
+    ('VTI', 'Vanguard Total Stock Market ETF code'),
+    ('BND', 'Vanguard Total Bond Market ETF code'),
+    ('TSM', 'TSMC ADR code'),
+    ('NVDA', 'NVIDIA stock code'),
+    ('GOOGL', 'Google Alphabet stock code'),
 ]
 
 for pattern, desc in checks:
