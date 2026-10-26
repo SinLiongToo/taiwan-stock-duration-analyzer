@@ -1276,12 +1276,69 @@
 
           <div class="control-item">
             <div class="control-label">
-              <span class="zh">關鍵榮枯/通膨參考基準線：</span>
-              <span class="en">Key Reference Benchmarks:</span>
+              <span class="zh">關鍵榮枯/通膨參考基準線（愈高愈好？還是愈低愈好？）：</span>
+              <span class="en">Key Benchmarks (Is Higher or Lower Better?):</span>
             </div>
-            <div style="font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.45rem 0.75rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-              <span>🔥 <strong>CPI: 2.0%</strong> <span class="zh">(Fed / 央行溫和通膨目標)</span><span class="en">(Central Bank Target)</span></span>
-              <span>🏭 <strong>PMI: 50.0</strong> <span class="zh">(&gt;50 景氣擴張 / &lt;50 景氣緊縮)</span><span class="en">(&gt;50 Expansion / &lt;50 Contraction)</span></span>
+            <div style="font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.55rem 0.85rem; display: flex; flex-direction: column; gap: 0.35rem;">
+              <div>
+                🔥 <strong><span class="zh">CPI 通膨率 (目標 2.0%)：</span><span class="en">CPI Inflation (2.0% Target): </span></strong>
+                <span class="zh"><strong style="color:var(--tw-down);">不是愈高愈好，也不是愈低愈好！維持在 1.5%~2.5% 最理想</strong>（&gt;3% 通膨過熱迫使央行升息傷股債；&lt;1% 則為通縮衰退警訊）。</span>
+                <span class="en"><strong style="color:var(--tw-down);">Neither too high nor too low! Best around 1.5%–2.5%</strong> (&gt;3% overheating forces rate hikes; &lt;1% signals deflation risk).</span>
+              </div>
+              <div>
+                🏭 <strong><span class="zh">PMI 採購經理人 (榮枯線 50.0)：</span><span class="en">PMI Index (50.0 Threshold): </span></strong>
+                <span class="zh"><strong style="color:var(--tw-up);">站上 50.0 以上，在 51~58 區間愈高愈好！</strong>（&gt;50 代表訂單擴張、拉貨強勁利好台美股；&lt;50 代表景氣收縮，但 43~46 谷底回升為長線買點）。</span>
+                <span class="en"><strong style="color:var(--tw-up);">Above 50.0 (especially 51–58) higher is better!</strong> (&gt;50 signals order expansion &amp; earnings growth; &lt;50 is contraction).</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- [註解區塊] 自動更新機制與官方每月公佈時間說明 (Auto-Update & Release Schedule Annotation) -->
+        <div id="macroAutoUpdateNote" style="margin-top: 1rem; padding: 0.85rem 1rem; border-radius: 8px; background: rgba(56, 189, 248, 0.08); border: 1px dashed var(--border-focus); font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6;">
+          <div style="font-weight: 700; color: var(--accent-blue); margin-bottom: 0.3rem; display: flex; align-items: center; gap: 0.4rem;">
+            <span>🔄</span>
+            <span class="zh">【系統註解】CPI 與 PMI 會自動更新嗎？更新機制與每月公佈時程說明：</span>
+            <span class="en">[System Annotation] Does CPI &amp; PMI Auto-Update? Mechanism &amp; Monthly Release Schedule:</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0.65rem;">
+            <div>
+              <span class="zh">
+                1️⃣ <strong>為什麼不是每天跳動？</strong><br>
+                台美股價（分頁 1）為「每個交易日收盤變動」；而 <strong>CPI 與 PMI 屬於「月度總經指標」（每月僅由政府與機構公佈 1 次）</strong>，在下次公佈日前數值保持固定。<br>
+                2️⃣ <strong>自動同步機制 (`update_prices.py` + GitHub Actions)：</strong><br>
+                本專案之 <code>update_prices.py</code> 已內建串接 <strong>美國勞工統計局 (BLS) 官方免金鑰 API (<code>CUUR0000SA0</code> / <code>CUUR0000SA0L1E</code>)</strong>，排程執行時會自動抓取最新指數換算 YoY 年增率並寫入 <code>latest_market_data.json</code> 的 <code>__MACRO_DATA__</code> 區塊，網頁開啟時自動同源載入。
+              </span>
+              <span class="en">
+                1️⃣ <strong>Why doesn't it change daily?</strong><br>
+                Unlike daily stock prices (Tab 1), <strong>CPI and PMI are monthly macroeconomic releases (published once a month)</strong>.<br>
+                2️⃣ <strong>Automated Sync (<code>update_prices.py</code> + GitHub Actions):</strong><br>
+                <code>update_prices.py</code> queries the official <strong>U.S. Bureau of Labor Statistics (BLS) Public API (<code>CUUR0000SA0</code> / <code>CUUR0000SA0L1E</code>)</strong> to compute YoY% inflation and syncs <code>__MACRO_DATA__</code> in <code>latest_market_data.json</code> automatically.
+              </span>
+            </div>
+            <div style="background: var(--bg-secondary); padding: 0.55rem 0.75rem; border-radius: 6px; border: 1px solid var(--border-color);">
+              <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">
+                <span class="zh">🗓️ 各項指標官方固定公佈時間（台灣時間）：</span>
+                <span class="en">🗓️ Official Monthly Release Schedule:</span>
+              </div>
+              <ul style="padding-left: 1.1rem; margin: 0; font-size: 0.79rem;">
+                <li>
+                  <span class="zh"><strong>美國 ISM 製造業 / 服務業 PMI</strong>：每月 <strong>第 1 與第 3 個營業日</strong> 22:00/23:00 公佈上月數據</span>
+                  <span class="en"><strong>US ISM Mfg / Services PMI</strong>: 1st &amp; 3rd business day of each month</span>
+                </li>
+                <li>
+                  <span class="zh"><strong>台灣製造業 PMI (中經院 CIER)</strong>：每月 <strong>月初（約 1～3 日）</strong> 14:00 公佈上月數據</span>
+                  <span class="en"><strong>TW Manufacturing PMI (CIER)</strong>: 1st–3rd of each month</span>
+                </li>
+                <li>
+                  <span class="zh"><strong>台灣 CPI 年增率 (主計總處)</strong>：每月 <strong>上旬（約 5～8 日）</strong> 16:00 公佈上月數據</span>
+                  <span class="en"><strong>TW CPI YoY% (DGBAS)</strong>: 5th–8th of each month</span>
+                </li>
+                <li>
+                  <span class="zh"><strong>美國 CPI / 核心 CPI (勞工統計局 BLS)</strong>：每月 <strong>中旬（約 10～15 日）</strong> 20:30/21:30 公佈上月數據</span>
+                  <span class="en"><strong>US CPI / Core CPI (BLS)</strong>: 10th–15th of each month (Auto-synced via BLS API)</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -1319,7 +1376,7 @@
       <div class="macro-dual-charts">
         <!-- CPI Chart Card -->
         <section class="card">
-          <div class="card-header">
+          <div class="card-header" style="margin-bottom: 0.6rem;">
             <div>
               <div class="card-title">
                 <span>🔥</span>
@@ -1327,20 +1384,48 @@
                 <span class="en">CPI Consumer Price Index YoY (%) Trend Chart</span>
               </div>
               <div class="card-subtitle">
-                <span class="zh">虛線為 2.0% 央行通膨目標基準線 · 觀察通膨降溫或反彈波段</span>
-                <span class="en">Dashed line indicates 2.0% Central Bank target · Track disinflation streaks</span>
+                <span class="zh">橘色虛線＝2.0% 央行目標線 · 綠色底區 (1.5%~2.5%)＝最舒適溫和通膨區 · 滑鼠移至圖表可檢視各月數值</span>
+                <span class="en">Dashed line = 2.0% target · Green zone (1.5%–2.5%) = Benign comfort zone · Hover over chart for monthly values</span>
               </div>
             </div>
           </div>
-          <div class="chart-container" id="cpiCanvasWrapper">
+
+          <!-- Top Legend Bar for CPI -->
+          <div id="cpiLegendBar" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem; padding:0.4rem 0.6rem; background:var(--bg-secondary); border-radius:6px; border:1px solid var(--border-color); font-size:0.8rem;">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="chart-container" id="cpiCanvasWrapper" style="height: 360px;">
             <canvas id="cpiCanvas"></canvas>
             <div id="cpiTooltip" class="macro-tooltip"></div>
+          </div>
+
+          <!-- CPI Reading Guide Box (Addresses green-circled area in user screenshot) -->
+          <div style="margin-top: 0.85rem; padding: 0.8rem 0.95rem; background: var(--bg-secondary); border-left: 4px solid #f59e0b; border-radius: 6px; font-size: 0.81rem; line-height: 1.55;">
+            <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem; font-size: 0.88rem;">
+              <span class="zh">💡 CPI 判讀指南：愈高愈好？還是愈低愈好？ ➡️ <span style="color:#22c55e;">「不高不低、維持在 1.5% ~ 2.5%（貼近 2.0%）最好！」</span></span>
+              <span class="en">💡 How to Read CPI: Is Higher or Lower Better? ➡️ <span style="color:#22c55e;">"Neither! Staying in the 1.5%–2.5% (near 2.0%) comfort zone is best!"</span></span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.28rem; color:var(--text-secondary);">
+              <div>
+                <span class="zh">🟢 <strong>1.5% ~ 2.5%（溫和通膨舒適區 · 最理想）</strong>：物價穩定、企業具溫和獲利成長，且 Fed 與台灣央行<strong>無須升息、甚至可降息寬鬆</strong>，最有利台積電 (2330)、輝達 (NVDA)、全市場 ETF (VT/VTI) 與債券 (BND) 同步上漲。</span>
+                <span class="en">🟢 <strong>1.5% ~ 2.5% (Goldilocks Comfort Zone · Best)</strong>: Price stability allows central banks to cut or hold rates steady—bullish for both Equities (2330/NVDA/VT/VTI) and Bonds (BND).</span>
+              </div>
+              <div>
+                <span class="zh">🔴 <strong>高於 3.0%（通膨過熱警戒區 · 愈高愈危險）</strong>：物價失控上漲，逼迫央行<strong>升息或維持高利率</strong>抽走資金，科技股本益比與債券價格雙雙重挫（股債雙殺）。</span>
+                <span class="en">🔴 <strong>Above 3.0% (Overheating Danger Zone · Worse as it rises)</strong>: Forces central bank rate hikes and tight liquidity, compressing tech valuations and bond prices.</span>
+              </div>
+              <div>
+                <span class="zh">🔵 <strong>低於 1.0% 或負值（通縮衰退警訊 · 過低也不好）</strong>：代表內需消費急凍、百業蕭條與企業削價競爭（通縮螺旋），通常伴隨經濟衰退。</span>
+                <span class="en">🔵 <strong>Below 1.0% or Negative (Deflation / Recession Warning)</strong>: Signals collapsing consumer demand and economic contraction.</span>
+              </div>
+            </div>
           </div>
         </section>
 
         <!-- PMI Chart Card -->
         <section class="card">
-          <div class="card-header">
+          <div class="card-header" style="margin-bottom: 0.6rem;">
             <div>
               <div class="card-title">
                 <span>🏭</span>
@@ -1348,14 +1433,42 @@
                 <span class="en">PMI Purchasing Managers' Index Expansion/Contraction Chart</span>
               </div>
               <div class="card-subtitle">
-                <span class="zh">虛線為 50.0 景氣榮枯分水嶺 · 50 以上代表景氣擴張、50 以下代表收縮</span>
-                <span class="en">Dashed line indicates 50.0 threshold · Above 50 = Expansion, Below 50 = Contraction</span>
+                <span class="zh">桃紅虛線＝50.0 景氣榮枯分水嶺 · 50 以上綠底＝景氣擴張 · 50 以下紅底＝景氣緊縮 · 滑鼠移至圖表可檢視各月數值</span>
+                <span class="en">Dashed line = 50.0 threshold · Above 50 = Expansion · Below 50 = Contraction · Hover over chart for monthly values</span>
               </div>
             </div>
           </div>
-          <div class="chart-container" id="pmiCanvasWrapper">
+
+          <!-- Top Legend Bar for PMI -->
+          <div id="pmiLegendBar" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem; padding:0.4rem 0.6rem; background:var(--bg-secondary); border-radius:6px; border:1px solid var(--border-color); font-size:0.8rem;">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="chart-container" id="pmiCanvasWrapper" style="height: 360px;">
             <canvas id="pmiCanvas"></canvas>
             <div id="pmiTooltip" class="macro-tooltip"></div>
+          </div>
+
+          <!-- PMI Reading Guide Box (Addresses green-circled area in user screenshot) -->
+          <div style="margin-top: 0.85rem; padding: 0.8rem 0.95rem; background: var(--bg-secondary); border-left: 4px solid #10b981; border-radius: 6px; font-size: 0.81rem; line-height: 1.55;">
+            <div style="font-weight: 700; color: var(--text-primary); margin-bottom: 0.35rem; font-size: 0.88rem;">
+              <span class="zh">💡 PMI 判讀指南：愈高愈好？還是愈低愈好？ ➡️ <span style="color:#ef4444;">「站上 50.0 榮枯線以上，在 51 ~ 58 擴張區間愈高愈穩健愈好！」</span></span>
+              <span class="en">💡 How to Read PMI: Is Higher or Lower Better? ➡️ <span style="color:#ef4444;">"Above the 50.0 threshold (ideally 51–58), higher is better!"</span></span>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:0.28rem; color:var(--text-secondary);">
+              <div>
+                <span class="zh">🟢 <strong>50.0 ~ 58.0（景氣溫和至強勁擴張區 · 愈高愈好）</strong>：<code>50.0</code> 是榮枯分水嶺，<strong>&gt; 50 代表新訂單增加、客戶拉貨、工廠擴產</strong>，直接推升台積電 (2330)、聯發科 (2454)、鴻海 (2317)、廣達 (2382) 與美股科技股營收獲利！</span>
+                <span class="en">🟢 <strong>50.0 ~ 58.0 (Healthy Expansion Zone · Higher is Better)</strong>: Readings above 50 indicate growing new orders, production, and AI/semiconductor export momentum.</span>
+              </div>
+              <div>
+                <span class="zh">🟡 <strong>高於 60.0（景氣極度過熱區 · 居高思危）</strong>：代表供應鏈產能滿載、原物料搶貨漲價，雖當下財報極佳，但常引發通膨反彈並暗示景氣接近高點。</span>
+                <span class="en">🟡 <strong>Above 60.0 (Overheated Peak Zone · Caution)</strong>: Supply chain bottlenecks and input price spikes often precede inflation pressure and cycle peaks.</span>
+              </div>
+              <div>
+                <span class="zh">🔴 <strong>低於 50.0（景氣緊縮區 · 基本面轉弱，但谷底翻揚是買點）</strong>：&lt; 50 代表訂單萎縮、庫存調整；但實務上當 PMI 落入 <code>43 ~ 46</code> 谷底並開始<strong>連續回升（連升轉折）</strong>時，往往是股市報酬率最高的長線左側買點！</span>
+                <span class="en">🔴 <strong>Below 50.0 (Contraction Zone · Weak demand, but trough inflection is a buy signal)</strong>: Indicates shrinking orders; however, an upturn from 43–46 troughs historically marks major equity buying opportunities.</span>
+              </div>
+            </div>
           </div>
         </section>
       </div>
@@ -3338,7 +3451,55 @@
       });
     }
 
+    const SHORT_MACRO_NAMES = {
+      "US_CPI":      { zh: "美國CPI",   en: "US CPI" },
+      "US_CORE_CPI": { zh: "美國核心CPI", en: "Core CPI" },
+      "TW_CPI":      { zh: "台灣CPI",   en: "TW CPI" },
+      "US_ISM_PMI":  { zh: "美製造PMI", en: "US Mfg PMI" },
+      "US_ISM_NMI":  { zh: "美服務PMI", en: "US Svc PMI" },
+      "TW_PMI":      { zh: "台製造PMI", en: "TW Mfg PMI" }
+    };
+
+    const macroChartHoverState = {
+      cpiCanvas: -1,
+      pmiCanvas: -1
+    };
+
+    function renderMacroLegendBar(legendId, categoryFilter) {
+      const bar = document.getElementById(legendId);
+      if (!bar) return;
+      const activeCodes = macroState.selectedSeries.filter(c => MACRO_INDICATORS[c] && MACRO_INDICATORS[c].category === categoryFilter);
+      if (activeCodes.length === 0) {
+        bar.innerHTML = `<span style="color:var(--text-muted);"><span class="zh">未選取指標</span><span class="en">No series selected</span></span>`;
+        return;
+      }
+      let html = "";
+      activeCodes.forEach(code => {
+        const st = calculateMacroStats(code);
+        if (!st) return;
+        const u = categoryFilter === "CPI" ? "%" : "";
+        const dec = (categoryFilter === "CPI" && st.meta.region === "TW") ? 2 : 1;
+        const momSign = st.momDiff > 0 ? "+" : "";
+        const momColor = st.momDiff > 0 ? "var(--tw-up)" : (st.momDiff < 0 ? "var(--tw-down)" : "var(--text-muted)");
+        html += `
+          <div style="display:inline-flex; align-items:center; gap:0.35rem; padding:0.2rem 0.55rem; border-radius:999px; background:var(--bg-card); border:1px solid var(--border-color);">
+            <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${st.meta.color};"></span>
+            <span style="font-weight:700; color:var(--text-primary);">
+              <span class="zh">${st.meta.nameZh}</span>
+              <span class="en">${st.meta.nameEn}</span>
+            </span>
+            <strong style="color:${st.meta.color}; font-size:0.85rem;">${st.latestVal.toFixed(dec)}${u}</strong>
+            <span style="font-size:0.74rem; color:${momColor};">(${momSign}${st.momDiff.toFixed(dec)}${u})</span>
+          </div>
+        `;
+      });
+      bar.innerHTML = html;
+    }
+
     function renderMacroCanvasChart(canvasId, wrapperId, categoryFilter, benchmarkVal, benchmarkLabelZh, benchmarkLabelEn) {
+      const legendId = categoryFilter === "CPI" ? "cpiLegendBar" : "pmiLegendBar";
+      renderMacroLegendBar(legendId, categoryFilter);
+
       const canvas = document.getElementById(canvasId);
       const wrapper = document.getElementById(wrapperId);
       if (!canvas || !wrapper) return;
@@ -3353,14 +3514,15 @@
 
       const width = rect.width;
       const height = rect.height;
-      const padding = { top: 25, right: 105, bottom: 40, left: 50 };
+      // Generous right padding (158px) & bottom padding (46px) so labels and X-axis dates NEVER clip or collide
+      const padding = { top: 28, right: 158, bottom: 46, left: 56 };
 
       ctx.clearRect(0, 0, width, height);
 
       const activeCodes = macroState.selectedSeries.filter(c => MACRO_INDICATORS[c] && MACRO_INDICATORS[c].category === categoryFilter);
       if (activeCodes.length === 0) {
         ctx.fillStyle = "#94a3b8";
-        ctx.font = "13px sans-serif";
+        ctx.font = "bold 14px sans-serif";
         ctx.textAlign = "center";
         ctx.fillText(
           state.lang === "zh" ? `請勾選至少一項 ${categoryFilter} 指標以顯示趨勢圖` : `Select at least one ${categoryFilter} series to display chart`,
@@ -3372,6 +3534,14 @@
 
       let minVal = benchmarkVal;
       let maxVal = benchmarkVal;
+      if (categoryFilter === "CPI") {
+        minVal = Math.min(minVal, 1.4);
+        maxVal = Math.max(maxVal, 3.2);
+      } else {
+        minVal = Math.min(minVal, 48.0);
+        maxVal = Math.max(maxVal, 58.0);
+      }
+
       const seriesList = [];
       let months = [];
 
@@ -3392,8 +3562,8 @@
       });
 
       const span = (maxVal - minVal) || 2;
-      const yMin = minVal - span * 0.15;
-      const yMax = maxVal + span * 0.15;
+      const yMin = minVal - span * 0.12;
+      const yMax = maxVal + span * 0.12;
 
       const plotW = width - padding.left - padding.right;
       const plotH = height - padding.top - padding.bottom;
@@ -3407,13 +3577,41 @@
         return padding.top + plotH - ((v - yMin) / (yMax - yMin)) * plotH;
       }
 
-      // Grid lines
-      const gridColor = state.theme === "dark" ? "rgba(148, 163, 184, 0.12)" : "rgba(100, 116, 139, 0.15)";
-      const axisColor = state.theme === "dark" ? "#64748b" : "#94a3b8";
+      // 1. Subtle Background Comfort / Expansion Zone Shading
+      if (categoryFilter === "CPI") {
+        // Green comfort zone: 1.5% to 2.5%
+        const yTop25 = getY(Math.min(yMax, 2.5));
+        const yBot15 = getY(Math.max(yMin, 1.5));
+        if (yBot15 > yTop25) {
+          ctx.fillStyle = state.theme === "dark" ? "rgba(34, 197, 94, 0.07)" : "rgba(22, 163, 74, 0.07)";
+          ctx.fillRect(padding.left, yTop25, plotW, yBot15 - yTop25);
+        }
+        // Red overheating zone: > 3.0%
+        if (yMax > 3.0) {
+          const y30 = getY(3.0);
+          ctx.fillStyle = state.theme === "dark" ? "rgba(239, 68, 68, 0.06)" : "rgba(220, 38, 38, 0.06)";
+          ctx.fillRect(padding.left, padding.top, plotW, Math.max(0, y30 - padding.top));
+        }
+      } else {
+        // PMI Expansion Zone (>= 50.0) vs Contraction Zone (< 50.0)
+        const y50 = getY(50.0);
+        if (y50 > padding.top) {
+          ctx.fillStyle = state.theme === "dark" ? "rgba(16, 185, 129, 0.06)" : "rgba(16, 185, 129, 0.06)";
+          ctx.fillRect(padding.left, padding.top, plotW, Math.min(plotH, y50 - padding.top));
+        }
+        if (y50 < padding.top + plotH) {
+          ctx.fillStyle = state.theme === "dark" ? "rgba(239, 68, 68, 0.07)" : "rgba(220, 38, 38, 0.07)";
+          ctx.fillRect(padding.left, Math.max(padding.top, y50), plotW, (padding.top + plotH) - Math.max(padding.top, y50));
+        }
+      }
+
+      // 2. Horizontal Grid Lines & High-Contrast Left Y-Axis Labels
+      const gridColor = state.theme === "dark" ? "rgba(148, 163, 184, 0.16)" : "rgba(100, 116, 139, 0.18)";
+      const axisTextColor = state.theme === "dark" ? "#cbd5e1" : "#334155";
       ctx.lineWidth = 1;
       ctx.strokeStyle = gridColor;
-      ctx.fillStyle = axisColor;
-      ctx.font = "10px sans-serif";
+      ctx.fillStyle = axisTextColor;
+      ctx.font = "bold 11px sans-serif";
       ctx.textAlign = "right";
       ctx.textBaseline = "middle";
 
@@ -3430,38 +3628,84 @@
         ctx.fillText(lbl, padding.left - 8, y);
       }
 
-      // Benchmark threshold dashed line (2.0% for CPI, 50.0 for PMI)
+      // 3. Benchmark Threshold Dashed Line (2.0% for CPI, 50.0 for PMI)
       if (benchmarkVal >= yMin && benchmarkVal <= yMax) {
         const by = getY(benchmarkVal);
-        ctx.strokeStyle = categoryFilter === "CPI" ? "rgba(245, 158, 11, 0.75)" : "rgba(244, 63, 94, 0.75)";
-        ctx.lineWidth = 1.8;
-        ctx.setLineDash([5, 4]);
+        ctx.strokeStyle = categoryFilter === "CPI" ? "#f59e0b" : "#f43f5e";
+        ctx.lineWidth = 2.0;
+        ctx.setLineDash([6, 4]);
         ctx.beginPath();
         ctx.moveTo(padding.left, by);
         ctx.lineTo(width - padding.right, by);
         ctx.stroke();
         ctx.setLineDash([]);
 
-        ctx.fillStyle = categoryFilter === "CPI" ? "#f59e0b" : "#f43f5e";
-        ctx.font = "bold 10px sans-serif";
+        const benchText = state.lang === "zh" ? benchmarkLabelZh : benchmarkLabelEn;
+        ctx.font = "bold 11px sans-serif";
+        const tw = ctx.measureText(benchText).width;
+        ctx.fillStyle = state.theme === "dark" ? "rgba(15, 23, 42, 0.88)" : "rgba(255, 255, 255, 0.92)";
+        ctx.fillRect(padding.left + 6, by - 19, tw + 10, 16);
+        ctx.fillStyle = categoryFilter === "CPI" ? "#fbbf24" : "#fb7185";
         ctx.textAlign = "left";
-        ctx.fillText(state.lang === "zh" ? benchmarkLabelZh : benchmarkLabelEn, padding.left + 6, by - 8);
+        ctx.textBaseline = "middle";
+        ctx.fillText(benchText, padding.left + 11, by - 11);
       }
 
-      // X-axis labels
-      ctx.fillStyle = axisColor;
-      ctx.font = "10px sans-serif";
+      // 4. High-Contrast Bottom X-Axis Labels (Always includes first & last month!)
+      ctx.strokeStyle = gridColor;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, padding.top + plotH);
+      ctx.lineTo(width - padding.right, padding.top + plotH);
+      ctx.stroke();
+
+      ctx.fillStyle = axisTextColor;
+      ctx.font = "bold 11.5px sans-serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "top";
-      const stepIdx = Math.max(1, Math.floor(months.length / 6));
-      for (let i = 0; i < months.length; i += stepIdx) {
-        ctx.fillText(months[i], getX(i), height - padding.bottom + 8);
+
+      const tickIndices = [];
+      const maxTicks = Math.min(6, months.length);
+      if (months.length <= 6) {
+        for (let i = 0; i < months.length; i++) tickIndices.push(i);
+      } else {
+        for (let t = 0; t < maxTicks - 1; t++) {
+          tickIndices.push(Math.round((t / (maxTicks - 1)) * (months.length - 1)));
+        }
+        if (!tickIndices.includes(months.length - 1)) {
+          tickIndices.push(months.length - 1);
+        }
       }
 
-      // Series lines and dots
+      tickIndices.forEach(i => {
+        const x = getX(i);
+        ctx.strokeStyle = axisTextColor;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(x, padding.top + plotH);
+        ctx.lineTo(x, padding.top + plotH + 5);
+        ctx.stroke();
+        ctx.fillText(months[i], x, padding.top + plotH + 9);
+      });
+
+      // 5. Hover Crosshair Line (if user is hovering over a month)
+      const hoverIdx = macroChartHoverState[canvasId];
+      if (hoverIdx !== undefined && hoverIdx >= 0 && hoverIdx < months.length) {
+        const hx = getX(hoverIdx);
+        ctx.strokeStyle = state.theme === "dark" ? "rgba(248, 250, 252, 0.45)" : "rgba(15, 23, 42, 0.35)";
+        ctx.lineWidth = 1.2;
+        ctx.setLineDash([4, 3]);
+        ctx.beginPath();
+        ctx.moveTo(hx, padding.top);
+        ctx.lineTo(hx, padding.top + plotH);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // 6. Series Lines, Dots, and Smart Anti-Collision Right-Edge Labels
+      const rightLabels = [];
       seriesList.forEach(s => {
         ctx.strokeStyle = s.meta.color;
-        ctx.lineWidth = 2.4;
+        ctx.lineWidth = 2.6;
         ctx.lineJoin = "round";
         ctx.beginPath();
         s.pts.forEach((p, idx) => {
@@ -3475,21 +3719,155 @@
         s.pts.forEach((p, idx) => {
           const x = getX(idx);
           const y = getY(p.value);
+          const isHovered = (idx === hoverIdx);
+          const isLast = (idx === s.pts.length - 1);
           ctx.fillStyle = s.meta.color;
           ctx.beginPath();
-          ctx.arc(x, y, idx === s.pts.length - 1 ? 4.2 : 2.5, 0, Math.PI * 2);
+          ctx.arc(x, y, isHovered ? 5.5 : (isLast ? 4.5 : 2.8), 0, Math.PI * 2);
           ctx.fill();
+          if (isHovered || isLast) {
+            ctx.strokeStyle = state.theme === "dark" ? "#0f172a" : "#ffffff";
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+          }
         });
 
         const lastPt = s.pts[s.pts.length - 1];
         const lx = getX(s.pts.length - 1);
         const ly = getY(lastPt.value);
-        ctx.fillStyle = s.meta.color;
-        ctx.font = "bold 11px sans-serif";
-        ctx.textAlign = "left";
-        ctx.textBaseline = "middle";
         const unitStr = categoryFilter === "CPI" ? "%" : "";
-        ctx.fillText(` ${s.meta.code} (${lastPt.value.toFixed(1)}${unitStr})`, lx + 5, ly);
+        const dec = (categoryFilter === "CPI" && s.meta.region === "TW") ? 2 : 1;
+        const shortName = SHORT_MACRO_NAMES[s.code]
+          ? (state.lang === "zh" ? SHORT_MACRO_NAMES[s.code].zh : SHORT_MACRO_NAMES[s.code].en)
+          : s.meta.code;
+        rightLabels.push({
+          code: s.code,
+          color: s.meta.color,
+          origX: lx,
+          origY: ly,
+          labelY: ly,
+          text: `${shortName} ${lastPt.value.toFixed(dec)}${unitStr}`
+        });
+      });
+
+      // Anti-collision vertical staggering for right-side labels (min 22px separation)
+      rightLabels.sort((a, b) => a.labelY - b.labelY);
+      const minGap = 22;
+      for (let i = 1; i < rightLabels.length; i++) {
+        if (rightLabels[i].labelY - rightLabels[i - 1].labelY < minGap) {
+          rightLabels[i].labelY = rightLabels[i - 1].labelY + minGap;
+        }
+      }
+      // Keep within bottom bound
+      const maxAllowedY = padding.top + plotH - 6;
+      if (rightLabels.length > 0 && rightLabels[rightLabels.length - 1].labelY > maxAllowedY) {
+        rightLabels[rightLabels.length - 1].labelY = maxAllowedY;
+        for (let i = rightLabels.length - 2; i >= 0; i--) {
+          if (rightLabels[i + 1].labelY - rightLabels[i].labelY < minGap) {
+            rightLabels[i].labelY = rightLabels[i + 1].labelY - minGap;
+          }
+        }
+      }
+
+      // Draw leader lines & pill badges on the right
+      ctx.font = "bold 11.5px sans-serif";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      rightLabels.forEach(lbl => {
+        const pillX = lbl.origX + 10;
+        const pillY = lbl.labelY;
+        // Leader line from dot to pill
+        ctx.strokeStyle = lbl.color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(lbl.origX + 4, lbl.origY);
+        ctx.lineTo(pillX - 2, pillY);
+        ctx.stroke();
+
+        const textW = ctx.measureText(lbl.text).width;
+        const boxH = 19;
+        ctx.fillStyle = state.theme === "dark" ? "rgba(15, 23, 42, 0.9)" : "rgba(255, 255, 255, 0.95)";
+        ctx.strokeStyle = lbl.color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.roundRect(pillX, pillY - boxH / 2, textW + 12, boxH, 4);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = lbl.color;
+        ctx.fillText(lbl.text, pillX + 6, pillY + 0.5);
+      });
+    }
+
+    function bindMacroChartTooltip(canvasId, wrapperId, tooltipId, categoryFilter, benchmarkLabelZh, benchmarkLabelEn) {
+      const canvas = document.getElementById(canvasId);
+      const wrapper = document.getElementById(wrapperId);
+      const tooltip = document.getElementById(tooltipId);
+      if (!canvas || !wrapper || !tooltip) return;
+
+      const benchmarkVal = categoryFilter === "CPI" ? 2.0 : 50.0;
+
+      canvas.addEventListener("mousemove", (e) => {
+        const rect = wrapper.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const padding = { top: 28, right: 158, bottom: 46, left: 56 };
+        const plotW = rect.width - padding.left - padding.right;
+
+        const activeCodes = macroState.selectedSeries.filter(c => MACRO_INDICATORS[c] && MACRO_INDICATORS[c].category === categoryFilter);
+        if (activeCodes.length === 0 || plotW <= 0) {
+          tooltip.style.display = "none";
+          return;
+        }
+        const pts0 = getMacroFilteredSeries(activeCodes[0]);
+        const n = pts0.length;
+        if (n === 0) return;
+
+        let relRatio = (mx - padding.left) / plotW;
+        relRatio = Math.max(0, Math.min(1, relRatio));
+        const idx = Math.round(relRatio * (n - 1));
+
+        macroChartHoverState[canvasId] = idx;
+        renderMacroCanvasChart(canvasId, wrapperId, categoryFilter, benchmarkVal, benchmarkLabelZh, benchmarkLabelEn);
+
+        const monthStr = pts0[idx].month;
+        let html = `<div style="font-weight:800; color:var(--text-primary); margin-bottom:0.35rem; border-bottom:1px solid var(--border-color); padding-bottom:0.25rem;">📅 ${monthStr}</div>`;
+        activeCodes.forEach(code => {
+          const ind = MACRO_INDICATORS[code];
+          const series = getMacroFilteredSeries(code);
+          const curVal = series[idx].value;
+          const prevVal = idx > 0 ? series[idx - 1].value : curVal;
+          const diff = curVal - prevVal;
+          const sign = diff > 0 ? "+" : "";
+          const u = categoryFilter === "CPI" ? "%" : "";
+          const dec = (categoryFilter === "CPI" && ind.region === "TW") ? 2 : 1;
+          const name = state.lang === "zh" ? ind.nameZh : ind.nameEn;
+          html += `
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem; margin-top:0.2rem;">
+              <span style="display:inline-flex; align-items:center; gap:0.3rem; color:var(--text-secondary);">
+                <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${ind.color};"></span>
+                ${name}
+              </span>
+              <span>
+                <strong style="color:${ind.color};">${curVal.toFixed(dec)}${u}</strong>
+                <span style="font-size:0.72rem; color:var(--text-muted);">(${sign}${diff.toFixed(dec)}${u})</span>
+              </span>
+            </div>
+          `;
+        });
+
+        tooltip.innerHTML = html;
+        tooltip.style.display = "block";
+        const leftPos = Math.min(rect.width - 230, Math.max(10, mx + 14));
+        const topPos = Math.max(10, my - 30);
+        tooltip.style.left = leftPos + "px";
+        tooltip.style.top = topPos + "px";
+      });
+
+      canvas.addEventListener("mouseleave", () => {
+        macroChartHoverState[canvasId] = -1;
+        tooltip.style.display = "none";
+        renderMacroCanvasChart(canvasId, wrapperId, categoryFilter, benchmarkVal, benchmarkLabelZh, benchmarkLabelEn);
       });
     }
 
@@ -3813,6 +4191,16 @@
         }
       });
 
+      // [自動更新註解] 若 latest_market_data.json 內含 __MACRO_DATA__，一併自動更新 CPI 與 PMI 月度序列
+      if (dataset.__MACRO_DATA__ && dataset.__MACRO_DATA__.series) {
+        const mSeries = dataset.__MACRO_DATA__.series;
+        Object.keys(mSeries).forEach(mCode => {
+          if (MACRO_INDICATORS[mCode] && Array.isArray(mSeries[mCode]) && mSeries[mCode].length === MACRO_MONTHS.length) {
+            MACRO_INDICATORS[mCode].values = mSeries[mCode];
+          }
+        });
+      }
+
       recalculateExBig5();
 
       const badgeZh = document.getElementById("dataStatusZh");
@@ -4011,6 +4399,8 @@
       renderCompanyChips();
       renderMacroChips();
       initListeners();
+      bindMacroChartTooltip("cpiCanvas", "cpiCanvasWrapper", "cpiTooltip", "CPI", "2.0% 央行目標線", "2.0% Target");
+      bindMacroChartTooltip("pmiCanvas", "pmiCanvasWrapper", "pmiTooltip", "PMI", "50.0 景氣榮枯線", "50.0 Threshold");
       applyPeriodDays(20);
       tryAutoFetchLocalData();
     });
