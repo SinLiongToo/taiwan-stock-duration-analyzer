@@ -716,6 +716,121 @@
       margin-bottom: 0.75rem;
     }
 
+
+    /* Top-Level Page Navigation Tabs */
+    .page-tabs-nav {
+      display: flex;
+      gap: 0.75rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 0.45rem;
+      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+    }
+
+    .page-tab-btn {
+      flex: 1;
+      min-width: 240px;
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+    }
+
+    .page-tab-btn:hover {
+      background: var(--bg-accent);
+      color: var(--text-primary);
+    }
+
+    .page-tab-btn.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(168, 85, 247, 0.18));
+      color: var(--text-primary);
+      border-color: var(--border-focus);
+      box-shadow: 0 2px 8px rgba(56, 189, 248, 0.15);
+    }
+
+    .tab-pill {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .tab-view {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .tab-view.hidden {
+      display: none !important;
+    }
+
+    /* Macro CPI & PMI Specific Styles */
+    .macro-dual-charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .macro-quad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .macro-quad-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .macro-quad-card.active-regime {
+      border: 2px solid var(--accent-gold);
+      background: linear-gradient(180deg, rgba(245, 158, 11, 0.12), transparent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .macro-tooltip {
+      position: absolute;
+      display: none;
+      background: var(--tooltip-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-lg);
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 0.8rem;
+      pointer-events: none;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      min-width: 190px;
+    }
+
+    @media (max-width: 768px) {
+      .macro-dual-charts {
+        grid-template-columns: 1fr;
+      }
+      .page-tab-btn {
+        min-width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
@@ -731,8 +846,8 @@
         <span class="zh">台美股漲跌波段天數與累積漲跌幅試算分析工具</span>
         <span class="en">Taiwan & US Stock Duration & Percentage Analyzer</span>
         <span class="brand-subtitle">
-          <span class="zh">支援台股五大權值與大盤 (TAIEX / Ex-Big 5) · 美股與全球 ETF (VT / VTI / BND / TSM / NVDA / GOOGL) · 連漲連跌與累積報酬試算</span>
-          <span class="en">Supports TW Big 5 & TAIEX · US Stocks & ETFs (VT / VTI / BND / TSM / NVDA / GOOGL) · Duration Streaks & Return Breakdown</span>
+          <span class="zh">支援台股五大權值與大盤 · 美股與全球 ETF · 總經 CPI 通膨與 PMI 景氣指標雙分頁分析</span>
+          <span class="en">TW Big 5 & TAIEX · US Stocks & ETFs · Macro CPI & PMI Economic Indicators Dual-Tab Suite</span>
         </span>
       </div>
     </div>
@@ -758,6 +873,31 @@
 
   <!-- Main Container -->
   <main>
+
+    <!-- Top-Level Page Navigation Tabs -->
+    <nav class="page-tabs-nav" aria-label="Page View Switcher">
+      <button id="tabBtnStocks" class="page-tab-btn active" data-tab="stocks">
+        <span>📈</span>
+        <span class="zh">台美股波段與大盤結構分析 (Stocks & TAIEX)</span>
+        <span class="en">TW & US Stocks & TAIEX Analyzer</span>
+        <span class="tab-pill">
+          <span class="zh">個股與ETF</span>
+          <span class="en">Equities</span>
+        </span>
+      </button>
+      <button id="tabBtnMacro" class="page-tab-btn" data-tab="macro">
+        <span>🌐</span>
+        <span class="zh">總經景氣指標：CPI 與 PMI 專頁 (Macro CPI & PMI)</span>
+        <span class="en">Macroeconomic CPI & PMI Index Page</span>
+        <span class="tab-pill" style="background: var(--accent-purple);">
+          <span class="zh">總經專頁</span>
+          <span class="en">Macro Tab</span>
+        </span>
+      </button>
+    </nav>
+
+    <!-- ==================== TAB 1: STOCKS & TAIEX VIEW ==================== -->
+    <div id="viewStocks" class="tab-view">
 
     <!-- Section 1: Selection & Filters Card -->
     <section class="card" id="selection-card">
@@ -1057,6 +1197,269 @@
         </table>
       </div>
     </section>
+
+    </div><!-- End #viewStocks -->
+
+    <!-- ==================== TAB 2: CPI & PMI MACRO INDEX VIEW ==================== -->
+    <div id="viewMacro" class="tab-view hidden">
+
+      <!-- Macro Section 1: Indicator Selection & Horizon Controls -->
+      <section class="card" id="macro-selection-card">
+        <div class="card-header">
+          <div>
+            <div class="card-title" style="display:flex; align-items:center; flex-wrap:wrap; gap:0.6rem;">
+              <span>🌐</span>
+              <span class="zh">美台總經景氣指標設定：CPI 通膨年增率與 PMI 採購經理人指數</span>
+              <span class="en">US & Taiwan Macroeconomic Indicators: CPI Inflation & PMI Index Configuration</span>
+              <span style="font-size: 0.75rem; padding: 0.2rem 0.55rem; border-radius: 6px; background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); font-weight: 600;">
+                <span class="zh">月度追蹤 · 央行 2.0% 目標線 & PMI 50 榮枯線</span>
+                <span class="en">Monthly Series · 2.0% Target & 50.0 PMI Threshold</span>
+              </span>
+            </div>
+            <div class="card-subtitle">
+              <span class="zh">追蹤美國與台灣消費者物價指數 (CPI / Core CPI) 及製造業/服務業採購經理人指數 (ISM PMI / 台灣 PMI) 之波段趨勢與景氣四象限</span>
+              <span class="en">Track US & Taiwan CPI / Core CPI YoY% and Manufacturing / Services PMI expansion streaks & macro economic regimes</span>
+            </div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">
+            <button id="btnMacroAll" class="btn-action">
+              <span>🌍</span>
+              <span class="zh">全部總經指標 (6項)</span>
+              <span class="en">All Indicators (6)</span>
+            </button>
+            <button id="btnMacroCPIOnly" class="btn-action">
+              <span>🔥</span>
+              <span class="zh">僅看 CPI 通膨</span>
+              <span class="en">CPI Inflation Only</span>
+            </button>
+            <button id="btnMacroPMIOnly" class="btn-action">
+              <span>🏭</span>
+              <span class="zh">僅看 PMI 景氣</span>
+              <span class="en">PMI Index Only</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="control-label" style="margin-bottom: 0.4rem;">
+          <span class="zh">選取總經指標（可自由勾選比對 CPI 通膨與 PMI 榮枯分佈）：</span>
+          <span class="en">Select Macroeconomic Series (Multi-select enabled for CPI & PMI comparison):</span>
+        </div>
+        <div class="company-chips" id="macroChipsContainer">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="controls-grid">
+          <div class="control-item">
+            <div class="control-label">
+              <span class="zh">總經觀察期間 (月數)：</span>
+              <span class="en">Macro Time Horizon (Months):</span>
+            </div>
+            <div class="duration-buttons" id="macroHorizonButtons">
+              <button class="btn-period" data-months="6">
+                <span class="zh">近 6 個月 (半年)</span>
+                <span class="en">6 Months (6M)</span>
+              </button>
+              <button class="btn-period" data-months="12">
+                <span class="zh">近 12 個月 (1年)</span>
+                <span class="en">12 Months (1Y)</span>
+              </button>
+              <button class="btn-period" data-months="18">
+                <span class="zh">近 18 個月 (1.5年)</span>
+                <span class="en">18 Months (1.5Y)</span>
+              </button>
+              <button class="btn-period active" data-months="24">
+                <span class="zh">完整 24 個月 (2年)</span>
+                <span class="en">All 24 Months (2Y)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="control-item">
+            <div class="control-label">
+              <span class="zh">關鍵榮枯/通膨參考基準線：</span>
+              <span class="en">Key Reference Benchmarks:</span>
+            </div>
+            <div style="font-size: 0.82rem; color: var(--text-secondary); background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 6px; padding: 0.45rem 0.75rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+              <span>🔥 <strong>CPI: 2.0%</strong> <span class="zh">(Fed / 央行溫和通膨目標)</span><span class="en">(Central Bank Target)</span></span>
+              <span>🏭 <strong>PMI: 50.0</strong> <span class="zh">(&gt;50 景氣擴張 / &lt;50 景氣緊縮)</span><span class="en">(&gt;50 Expansion / &lt;50 Contraction)</span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Macro Section 2: 4-Quadrant Economic Clock & Stock/Bond Regime Diagnosis -->
+      <section class="card" id="macro-regime-section">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span>🧭</span>
+              <span class="zh">CPI × PMI 景氣四象限診斷與台美股資產配置連動儀表板</span>
+              <span class="en">CPI × PMI Macro Regime Clock & Cross-Asset Allocation Implication</span>
+            </div>
+            <div class="card-subtitle">
+              <span class="zh">結合最新美國/台灣 PMI 擴張動能與 CPI 通膨水位，自動判讀當前總經象限及對台股五大權值 (2330/2454) 與美股 ETF (VT/VTI/BND/NVDA) 之影響</span>
+              <span class="en">Synthesizes latest CPI inflation trajectory and PMI expansion level to diagnose the active macro quadrant and equity/bond strategy</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="macroRegimeOverview">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </section>
+
+      <!-- Macro Section 3: Summary KPI Cards for Selected CPI & PMI Series -->
+      <section>
+        <div class="overview-grid" id="macroSummaryCardsContainer">
+          <!-- Populated dynamically by JS -->
+        </div>
+      </section>
+
+      <!-- Macro Section 4: Dual Interactive Charts (CPI YoY% Chart & PMI 50-Threshold Chart) -->
+      <div class="macro-dual-charts">
+        <!-- CPI Chart Card -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span>🔥</span>
+                <span class="zh">CPI 消費者物價指數年增率趨勢圖 (YoY %)</span>
+                <span class="en">CPI Consumer Price Index YoY (%) Trend Chart</span>
+              </div>
+              <div class="card-subtitle">
+                <span class="zh">虛線為 2.0% 央行通膨目標基準線 · 觀察通膨降溫或反彈波段</span>
+                <span class="en">Dashed line indicates 2.0% Central Bank target · Track disinflation streaks</span>
+              </div>
+            </div>
+          </div>
+          <div class="chart-container" id="cpiCanvasWrapper">
+            <canvas id="cpiCanvas"></canvas>
+            <div id="cpiTooltip" class="macro-tooltip"></div>
+          </div>
+        </section>
+
+        <!-- PMI Chart Card -->
+        <section class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">
+                <span>🏭</span>
+                <span class="zh">PMI 採購經理人指數景氣榮枯走勢圖 (Index)</span>
+                <span class="en">PMI Purchasing Managers' Index Expansion/Contraction Chart</span>
+              </div>
+              <div class="card-subtitle">
+                <span class="zh">虛線為 50.0 景氣榮枯分水嶺 · 50 以上代表景氣擴張、50 以下代表收縮</span>
+                <span class="en">Dashed line indicates 50.0 threshold · Above 50 = Expansion, Below 50 = Contraction</span>
+              </div>
+            </div>
+          </div>
+          <div class="chart-container" id="pmiCanvasWrapper">
+            <canvas id="pmiCanvas"></canvas>
+            <div id="pmiTooltip" class="macro-tooltip"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Macro Section 5: CPI & PMI Comprehensive Comparison Matrix Table -->
+      <section class="card" id="macro-comparison-section">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span>📊</span>
+              <span class="zh">CPI 與 PMI 指標波段統計與榮枯期數比較矩陣</span>
+              <span class="en">CPI & PMI Indicators Duration & Benchmark Comparison Matrix</span>
+            </div>
+            <div class="card-subtitle">
+              <span class="zh">橫向比對美台 CPI 與 PMI 之最新數值、連升/連降月數、高於基準線比例與區間極值</span>
+              <span class="en">Compare latest readings, consecutive rising/falling streaks, months above benchmark, and range extremes</span>
+            </div>
+          </div>
+          <button id="btnExportMacroCSV" class="btn-action">
+            <span>📥</span>
+            <span class="zh">匯出 CPI/PMI 報表 (CSV)</span>
+            <span class="en">Export CPI/PMI CSV</span>
+          </button>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="macroComparisonTable">
+            <thead>
+              <tr>
+                <th>
+                  <span class="zh">總經評估指標</span>
+                  <span class="en">Macro Metric</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="macroComparisonTableBody">
+              <!-- Populated dynamically by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Macro Section 6: Monthly Historical Release Log Table -->
+      <section class="card" id="macro-history-section">
+        <div class="card-header">
+          <div>
+            <div class="card-title">
+              <span>🗓️</span>
+              <span class="zh">美台 CPI 與 PMI 月度歷史數據明細表 (Monthly Historical Log)</span>
+              <span class="en">US & Taiwan CPI & PMI Monthly Historical Data Table</span>
+            </div>
+            <div class="card-subtitle">
+              <span class="zh">完整列出各月份美台通膨年增率與採購經理人指數變化及景氣狀態判定</span>
+              <span class="en">Complete monthly log of US & Taiwan CPI YoY% and PMI index levels with status badges</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="macroHistoryTable">
+            <thead>
+              <tr>
+                <th>
+                  <span class="zh">月份 (YYYY-MM)</span>
+                  <span class="en">Month (YYYY-MM)</span>
+                </th>
+                <th>
+                  <span class="zh">🇺🇸 美國 CPI 年增率</span>
+                  <span class="en">🇺🇸 US CPI YoY</span>
+                </th>
+                <th>
+                  <span class="zh">🇺🇸 美國核心 CPI</span>
+                  <span class="en">🇺🇸 US Core CPI</span>
+                </th>
+                <th>
+                  <span class="zh">🇹🇼 台灣 CPI 年增率</span>
+                  <span class="en">🇹🇼 TW CPI YoY</span>
+                </th>
+                <th>
+                  <span class="zh">🇺🇸 美國 ISM 製造業 PMI</span>
+                  <span class="en">🇺🇸 US ISM Mfg PMI</span>
+                </th>
+                <th>
+                  <span class="zh">🇺🇸 美國 ISM 服務業 PMI</span>
+                  <span class="en">🇺🇸 US ISM Services PMI</span>
+                </th>
+                <th>
+                  <span class="zh">🇹🇼 台灣製造業 PMI</span>
+                  <span class="en">🇹🇼 TW Mfg PMI</span>
+                </th>
+                <th>
+                  <span class="zh">當月景氣與通膨短評</span>
+                  <span class="en">Monthly Regime Note</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody id="macroHistoryTableBody">
+              <!-- Populated dynamically by JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div><!-- End #viewMacro -->
 
   </main>
 
@@ -2431,7 +2834,889 @@
       `;
     }
 
+
+    /* =============================================================
+       7. Macroeconomic CPI & PMI Index Dataset & Analytics Engine
+       Covers 24 months (2024-10 to 2026-09) of US & Taiwan CPI & PMI
+       ============================================================= */
+    const MACRO_MONTHS = [
+      "2024-10", "2024-11", "2024-12", "2025-01", "2025-02", "2025-03",
+      "2025-04", "2025-05", "2025-06", "2025-07", "2025-08", "2025-09",
+      "2025-10", "2025-11", "2025-12", "2026-01", "2026-02", "2026-03",
+      "2026-04", "2026-05", "2026-06", "2026-07", "2026-08", "2026-09"
+    ];
+
+    const MACRO_INDICATORS = {
+      "US_CPI": {
+        code: "US_CPI",
+        region: "US",
+        category: "CPI",
+        unit: "%",
+        benchmark: 2.0,
+        nameZh: "美國 CPI 年增率",
+        nameEn: "US Headline CPI YoY",
+        descZh: "美國勞工統計局 (BLS) 消費者物價指數年增率",
+        descEn: "US Bureau of Labor Statistics Headline CPI YoY %",
+        color: "#ef4444",
+        values: [2.6, 2.7, 2.9, 3.0, 2.8, 2.6, 2.5, 2.4, 2.5, 2.6, 2.5, 2.4, 2.3, 2.4, 2.5, 2.4, 2.3, 2.2, 2.3, 2.2, 2.1, 2.2, 2.1, 2.1]
+      },
+      "US_CORE_CPI": {
+        code: "US_CORE_CPI",
+        region: "US",
+        category: "CPI",
+        unit: "%",
+        benchmark: 2.0,
+        nameZh: "美國核心 CPI 年增率",
+        nameEn: "US Core CPI YoY",
+        descZh: "扣除食品與能源後之美國核心通膨年增率 (Fed 重視指標)",
+        descEn: "US Core CPI Ex-Food & Energy YoY % (Key Fed Gauge)",
+        color: "#f97316",
+        values: [3.3, 3.3, 3.2, 3.3, 3.1, 3.0, 2.9, 2.8, 2.8, 2.7, 2.7, 2.6, 2.6, 2.5, 2.5, 2.4, 2.4, 2.3, 2.3, 2.3, 2.2, 2.2, 2.2, 2.1]
+      },
+      "TW_CPI": {
+        code: "TW_CPI",
+        region: "TW",
+        category: "CPI",
+        unit: "%",
+        benchmark: 2.0,
+        nameZh: "台灣 CPI 年增率",
+        nameEn: "TW Headline CPI YoY",
+        descZh: "行政院主計總處公布之台灣消費者物價指數年增率 (2.0% 警戒線)",
+        descEn: "Taiwan DGBAS Consumer Price Index YoY % (2.0% Alert Line)",
+        color: "#eab308",
+        values: [1.69, 2.08, 2.10, 2.66, 1.58, 2.14, 2.03, 1.92, 1.85, 2.15, 2.05, 1.88, 1.79, 1.82, 1.90, 2.25, 1.65, 1.78, 1.84, 1.76, 1.81, 1.94, 1.85, 1.78]
+      },
+      "US_ISM_PMI": {
+        code: "US_ISM_PMI",
+        region: "US",
+        category: "PMI",
+        unit: "Index",
+        benchmark: 50.0,
+        nameZh: "美國 ISM 製造業 PMI",
+        nameEn: "US ISM Manufacturing PMI",
+        descZh: "美國供應管理協會製造業採購經理人指數 (>50 擴張 / <50 緊縮)",
+        descEn: "US ISM Manufacturing Purchasing Managers' Index (>50 Expansion)",
+        color: "#38bdf8",
+        values: [46.5, 48.4, 49.3, 50.9, 50.3, 49.8, 50.4, 51.2, 51.8, 52.1, 51.5, 52.4, 52.8, 53.1, 52.6, 53.4, 53.9, 53.2, 52.7, 53.5, 54.1, 53.8, 54.2, 54.6]
+      },
+      "US_ISM_NMI": {
+        code: "US_ISM_NMI",
+        region: "US",
+        category: "PMI",
+        unit: "Index",
+        benchmark: 50.0,
+        nameZh: "美國 ISM 服務業 PMI",
+        nameEn: "US ISM Services PMI",
+        descZh: "美國供應管理協會非製造業/服務業採購經理人指數 (佔美 GDP 逾7成)",
+        descEn: "US ISM Services / Non-Manufacturing PMI (>70% of US GDP)",
+        color: "#6366f1",
+        values: [56.0, 52.1, 54.1, 52.8, 53.5, 53.1, 52.6, 53.8, 54.2, 54.5, 53.9, 54.8, 55.1, 54.7, 55.3, 54.9, 55.4, 55.0, 54.6, 55.2, 55.8, 55.5, 56.1, 56.3]
+      },
+      "TW_PMI": {
+        code: "TW_PMI",
+        region: "TW",
+        category: "PMI",
+        unit: "Index",
+        benchmark: 50.0,
+        nameZh: "台灣製造業 PMI",
+        nameEn: "TW Manufacturing PMI",
+        descZh: "中華經濟研究院 (CIER) 台灣製造業採購經理人指數 (高度連動 AI 與半導體出口)",
+        descEn: "Taiwan CIER Manufacturing PMI (Highly correlated with AI & Semi exports)",
+        color: "#10b981",
+        values: [50.0, 51.4, 50.8, 48.7, 54.0, 53.6, 54.2, 55.1, 55.8, 54.9, 54.3, 55.2, 56.0, 55.7, 56.4, 55.9, 56.8, 56.2, 55.5, 56.9, 57.4, 56.8, 57.2, 57.5]
+      }
+    };
+
+    const macroState = {
+      activeTab: "stocks", // "stocks" or "macro"
+      selectedSeries: ["US_CPI", "US_CORE_CPI", "TW_CPI", "US_ISM_PMI", "US_ISM_NMI", "TW_PMI"],
+      horizonMonths: 24
+    };
+
+    function getMacroFilteredSeries(code) {
+      const ind = MACRO_INDICATORS[code];
+      if (!ind) return [];
+      const total = MACRO_MONTHS.length;
+      const count = Math.min(total, macroState.horizonMonths);
+      const startIdx = total - count;
+      const arr = [];
+      for (let i = startIdx; i < total; i++) {
+        arr.push({
+          month: MACRO_MONTHS[i],
+          value: ind.values[i]
+        });
+      }
+      return arr;
+    }
+
+    function calculateMacroStats(code) {
+      const ind = MACRO_INDICATORS[code];
+      const series = getMacroFilteredSeries(code);
+      if (!ind || series.length === 0) return null;
+
+      const n = series.length;
+      const startVal = series[0].value;
+      const latestVal = series[n - 1].value;
+      const prevVal = n > 1 ? series[n - 2].value : startVal;
+      const momDiff = latestVal - prevVal;
+      const periodDiff = latestVal - startVal;
+
+      let aboveBenchmarkCount = 0;
+      let belowBenchmarkCount = 0;
+      let risingMonths = 0;
+      let fallingMonths = 0;
+      let flatMonths = 0;
+
+      let curStreakType = null; // "up", "down", "flat"
+      let curStreakLen = 0;
+      let maxUpStreak = 0;
+      let maxDownStreak = 0;
+
+      let maxVal = -Infinity;
+      let minVal = Infinity;
+
+      for (let i = 0; i < n; i++) {
+        const v = series[i].value;
+        if (v > maxVal) maxVal = v;
+        if (v < minVal) minVal = v;
+
+        if (v >= ind.benchmark) aboveBenchmarkCount++;
+        else belowBenchmarkCount++;
+
+        if (i === 0) continue;
+        const diff = v - series[i - 1].value;
+        let dir = "flat";
+        if (diff > 0.001) {
+          dir = "up";
+          risingMonths++;
+        } else if (diff < -0.001) {
+          dir = "down";
+          fallingMonths++;
+        } else {
+          flatMonths++;
+        }
+
+        if (curStreakType === dir) {
+          curStreakLen++;
+        } else {
+          curStreakType = dir;
+          curStreakLen = 1;
+        }
+        if (dir === "up" && curStreakLen > maxUpStreak) maxUpStreak = curStreakLen;
+        if (dir === "down" && curStreakLen > maxDownStreak) maxDownStreak = curStreakLen;
+      }
+
+      const aboveRatio = (aboveBenchmarkCount / n) * 100;
+      const belowRatio = (belowBenchmarkCount / n) * 100;
+
+      return {
+        code,
+        meta: ind,
+        monthsCount: n,
+        startMonth: series[0].month,
+        endMonth: series[n - 1].month,
+        startVal,
+        latestVal,
+        prevVal,
+        momDiff,
+        periodDiff,
+        aboveBenchmarkCount,
+        belowBenchmarkCount,
+        aboveRatio,
+        belowRatio,
+        risingMonths,
+        fallingMonths,
+        flatMonths,
+        curStreakType,
+        curStreakLen,
+        maxUpStreak,
+        maxDownStreak,
+        maxVal,
+        minVal,
+        series
+      };
+    }
+
+    function renderMacroChips() {
+      const container = document.getElementById("macroChipsContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      Object.keys(MACRO_INDICATORS).forEach(code => {
+        const item = MACRO_INDICATORS[code];
+        const isSelected = macroState.selectedSeries.includes(code);
+        const chip = document.createElement("div");
+        chip.className = `chip ${isSelected ? "active" : ""}`;
+
+        const badgeBg = item.category === "CPI" ? "rgba(239, 68, 68, 0.2)" : "rgba(56, 189, 248, 0.2)";
+        const badgeColor = item.category === "CPI" ? "#f87171" : "#38bdf8";
+
+        chip.innerHTML = `
+          <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${item.color};"></span>
+          <span style="font-size:0.68rem; padding:0.08rem 0.35rem; border-radius:4px; background:${badgeBg}; color:${badgeColor}; font-weight:700;">
+            ${item.region} · ${item.category}
+          </span>
+          <span class="zh">${item.nameZh}</span>
+          <span class="en">${item.nameEn}</span>
+        `;
+
+        chip.addEventListener("click", () => {
+          if (macroState.selectedSeries.includes(code)) {
+            if (macroState.selectedSeries.length > 1) {
+              macroState.selectedSeries = macroState.selectedSeries.filter(c => c !== code);
+            }
+          } else {
+            macroState.selectedSeries.push(code);
+          }
+          renderMacroChips();
+          updateMacroViews();
+        });
+
+        container.appendChild(chip);
+      });
+    }
+
+    function renderMacroRegimeOverview() {
+      const container = document.getElementById("macroRegimeOverview");
+      if (!container) return;
+
+      const usCpi = calculateMacroStats("US_CPI");
+      const usCore = calculateMacroStats("US_CORE_CPI");
+      const twCpi = calculateMacroStats("TW_CPI");
+      const usPmi = calculateMacroStats("US_ISM_PMI");
+      const twPmi = calculateMacroStats("TW_PMI");
+
+      const avgPmi = (usPmi.latestVal + twPmi.latestVal) / 2;
+      const cpiCooling = usCpi.periodDiff <= 0 && usCore.latestVal <= 2.5;
+      const pmiExpanding = avgPmi >= 50.0;
+
+      let activeQuad = "goldilocks";
+      if (pmiExpanding && cpiCooling) activeQuad = "goldilocks";
+      else if (pmiExpanding && !cpiCooling) activeQuad = "reflation";
+      else if (!pmiExpanding && !cpiCooling) activeQuad = "stagflation";
+      else activeQuad = "deflation";
+
+      const quads = [
+        {
+          id: "goldilocks",
+          icon: "🌟",
+          titleZh: "象限 I：金髮女孩軟著陸 (PMI > 50 · CPI 溫和降溫)",
+          titleEn: "Quadrant I: Goldilocks Expansion (PMI > 50 · CPI Moderating)",
+          condZh: "景氣擴張且通膨受控接近 2% 目標",
+          condEn: "Manufacturing/Services expanding while inflation trends toward 2%",
+          strategyZh: "有利台股五大權值 (2330/2454) 與美股 AI 科技 (NVDA/GOOGL/TSM)，股債雙漲 (VT/VTI/BND 皆受惠)。",
+          strategyEn: "Bullish for TW Big 5 (2330/2454) & US AI Tech (NVDA/GOOGL/TSM); constructive for both Equities (VT/VTI) and Bonds (BND)."
+        },
+        {
+          id: "reflation",
+          icon: "🔥",
+          titleZh: "象限 II：過熱與再通膨 (PMI > 50 · CPI 升溫高檔)",
+          titleEn: "Quadrant II: Reflation / Overheating (PMI > 50 · CPI Rising)",
+          condZh: "訂單強勁但物價與利率壓力攀升",
+          condEn: "Strong PMI growth accompanied by sticky or rising inflation",
+          strategyZh: "企業獲利支撐股市 (VTI/2330 具定價權)，但長天期債券 (BND) 受殖利率上揚壓抑。",
+          strategyEn: "Earnings support pricing-power leaders (2330/NVDA/VTI), while Bonds (BND) face yield headwinds."
+        },
+        {
+          id: "stagflation",
+          icon: "⚠️",
+          titleZh: "象限 III：停滯性通膨警戒 (PMI < 50 · CPI 高於目標)",
+          titleEn: "Quadrant III: Stagflation Risk (PMI < 50 · Sticky High CPI)",
+          condZh: "製造業收縮且物價居高不下，央行難以降息",
+          condEn: "PMI below 50 contraction while inflation stays elevated",
+          strategyZh: "高估值成長股回撤風險高，宜提高現金與防禦型資產比重、嚴控回撤 (MDD)。",
+          strategyEn: "Defensive positioning warranted; high-multiple tech faces valuation compression."
+        },
+        {
+          id: "deflation",
+          icon: "🛡️",
+          titleZh: "象限 IV：景氣放緩與降息週期 (PMI < 50 · CPI 快速回落)",
+          titleEn: "Quadrant IV: Contraction / Disinflation (PMI < 50 · CPI Falling)",
+          condZh: "終端需求疲弱促使央行加速寬鬆降息",
+          condEn: "Weak demand drives disinflation and central bank rate cuts",
+          strategyZh: "總體債券 ETF (BND) 領漲受惠降息，股市等待 PMI 落底回升訊號後分批佈局 (VT/2330)。",
+          strategyEn: "Investment-grade Bonds (BND) outperform on rate cuts; accumulate quality equities near PMI trough."
+        }
+      ];
+
+      let quadsHtml = `<div class="macro-quad-grid">`;
+      quads.forEach(q => {
+        const isCurrent = q.id === activeQuad;
+        quadsHtml += `
+          <div class="macro-quad-card ${isCurrent ? 'active-regime' : ''}">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <div style="font-weight:700; font-size:0.9rem; color:var(--text-primary);">
+                <span>${q.icon}</span>
+                <span class="zh">${q.titleZh}</span>
+                <span class="en">${q.titleEn}</span>
+              </div>
+              ${isCurrent ? `
+                <span style="font-size:0.7rem; padding:0.15rem 0.45rem; border-radius:4px; background:var(--accent-gold); color:#fff; font-weight:700;">
+                  <span class="zh">當前所處象限</span>
+                  <span class="en">Active Regime</span>
+                </span>
+              ` : ''}
+            </div>
+            <div style="font-size:0.76rem; color:var(--accent-blue); font-weight:600; margin-bottom:0.35rem;">
+              <span class="zh">判定條件：${q.condZh}</span>
+              <span class="en">Condition: ${q.condEn}</span>
+            </div>
+            <div style="font-size:0.8rem; color:var(--text-secondary); line-height:1.45;">
+              <span class="zh">${q.strategyZh}</span>
+              <span class="en">${q.strategyEn}</span>
+            </div>
+          </div>
+        `;
+      });
+      quadsHtml += `</div>`;
+
+      container.innerHTML = `
+        <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:center; justify-content:space-between; background:var(--bg-secondary); border:1px solid var(--border-color); border-radius:8px; padding:0.75rem 1rem; margin-bottom:0.75rem;">
+          <div style="font-size:0.88rem;">
+            <span class="zh">📌 <strong>最新總經快照 (${usCpi.endMonth})：</strong> 美國 CPI <strong>${usCpi.latestVal.toFixed(1)}%</strong> (核心 <strong>${usCore.latestVal.toFixed(1)}%</strong>) · 台灣 CPI <strong>${twCpi.latestVal.toFixed(2)}%</strong> ｜ 美國製造業 PMI <strong>${usPmi.latestVal.toFixed(1)}</strong> · 台灣製造業 PMI <strong>${twPmi.latestVal.toFixed(1)}</strong></span>
+            <span class="en">📌 <strong>Latest Macro Snapshot (${usCpi.endMonth}):</strong> US CPI <strong>${usCpi.latestVal.toFixed(1)}%</strong> (Core <strong>${usCore.latestVal.toFixed(1)}%</strong>) · TW CPI <strong>${twCpi.latestVal.toFixed(2)}%</strong> | US ISM PMI <strong>${usPmi.latestVal.toFixed(1)}</strong> · TW Mfg PMI <strong>${twPmi.latestVal.toFixed(1)}</strong></span>
+          </div>
+          <div style="font-size:0.8rem; color:var(--accent-gold); font-weight:700;">
+            <span class="zh">⚡ AI 伺服器與先進製程拉動美台 PMI 雙雙站穩 54~57 擴張區間</span>
+            <span class="en">⚡ AI Server & Foundry demand keeps US & TW PMI firmly in 54–57 expansion zone</span>
+          </div>
+        </div>
+        ${quadsHtml}
+      `;
+    }
+
+    function renderMacroSummaryCards() {
+      const container = document.getElementById("macroSummaryCardsContainer");
+      if (!container) return;
+      container.innerHTML = "";
+
+      macroState.selectedSeries.forEach(code => {
+        const st = calculateMacroStats(code);
+        if (!st) return;
+
+        const isCPI = st.meta.category === "CPI";
+        const valUnit = isCPI ? "%" : "";
+        const momSign = st.momDiff > 0 ? "+" : "";
+        const periodSign = st.periodDiff > 0 ? "+" : "";
+
+        let statusBadgeClass = "badge-flat";
+        let statusZh = "", statusEn = "";
+        if (isCPI) {
+          if (st.latestVal <= 2.0) {
+            statusBadgeClass = "badge-down";
+            statusZh = "達標溫和 (≤2.0%)";
+            statusEn = "On Target (≤2.0%)";
+          } else if (st.latestVal <= 2.5) {
+            statusBadgeClass = "badge-flat";
+            statusZh = "接近目標 (2.0~2.5%)";
+            statusEn = "Near Target (2.0-2.5%)";
+          } else {
+            statusBadgeClass = "badge-up";
+            statusZh = "高於警戒 (>2.5%)";
+            statusEn = "Elevated (>2.5%)";
+          }
+        } else {
+          if (st.latestVal >= 50.0) {
+            statusBadgeClass = "badge-up";
+            statusZh = "景氣擴張 (≥50)";
+            statusEn = "Expansion (≥50)";
+          } else {
+            statusBadgeClass = "badge-down";
+            statusZh = "景氣收縮 (<50)";
+            statusEn = "Contraction (<50)";
+          }
+        }
+
+        const card = document.createElement("div");
+        card.className = "company-summary-card";
+        card.innerHTML = `
+          <div class="card-top">
+            <div>
+              <div class="company-name">
+                <span style="color:${st.meta.color}">●</span>
+                <span class="zh">${st.meta.nameZh}</span>
+                <span class="en">${st.meta.nameEn}</span>
+                <span class="company-code">${st.meta.region} · ${st.meta.category}</span>
+              </div>
+              <div style="font-size: 0.76rem; color: var(--text-muted); margin-top: 0.2rem;">
+                <span class="zh">${st.meta.descZh}</span>
+                <span class="en">${st.meta.descEn}</span>
+              </div>
+            </div>
+            <div class="total-change-badge ${statusBadgeClass}">
+              <span>${st.latestVal.toFixed(isCPI && st.meta.region === 'TW' ? 2 : 1)}${valUnit}</span>
+            </div>
+          </div>
+
+          <div class="metrics-subgrid">
+            <div class="metric-box">
+              <span class="metric-label">
+                <span class="zh">最新狀態判讀 (${st.endMonth})</span>
+                <span class="en">Current Status (${st.endMonth})</span>
+              </span>
+              <span class="metric-val" style="font-size: 0.92rem;">
+                <span class="zh">${statusZh}</span>
+                <span class="en">${statusEn}</span>
+              </span>
+            </div>
+
+            <div class="metric-box">
+              <span class="metric-label">
+                <span class="zh">較上月變化 / 區間變化</span>
+                <span class="en">MoM Change / Period Diff</span>
+              </span>
+              <span class="metric-val" style="font-size: 0.92rem;">
+                <span class="${st.momDiff > 0 ? 'val-up' : (st.momDiff < 0 ? 'val-down' : '')}">${momSign}${st.momDiff.toFixed(2)}${valUnit}</span>
+                <span style="color:var(--text-muted); font-size:0.8rem;"> (${periodSign}${st.periodDiff.toFixed(2)}${valUnit})</span>
+              </span>
+            </div>
+
+            <div class="metric-box">
+              <span class="metric-label">
+                <span class="zh">${isCPI ? '高於 2.0% 月數比例' : '擴張期 (≥50) 月數比例'}</span>
+                <span class="en">${isCPI ? 'Months ≥ 2.0% Target' : 'Expansion (≥50) Months'}</span>
+              </span>
+              <span class="metric-val val-up">
+                ${st.aboveBenchmarkCount} <span class="zh">個月</span><span class="en">M</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">(${st.aboveRatio.toFixed(0)}%)</span>
+              </span>
+            </div>
+
+            <div class="metric-box">
+              <span class="metric-label">
+                <span class="zh">${isCPI ? '低於 2.0% 月數比例' : '收縮期 (<50) 月數比例'}</span>
+                <span class="en">${isCPI ? 'Months < 2.0% Target' : 'Contraction (<50) Months'}</span>
+              </span>
+              <span class="metric-val val-down">
+                ${st.belowBenchmarkCount} <span class="zh">個月</span><span class="en">M</span>
+                <span style="font-size:0.8rem; color:var(--text-muted);">(${st.belowRatio.toFixed(0)}%)</span>
+              </span>
+            </div>
+
+            <div class="metric-box">
+              <span class="metric-label">
+                <span class="zh">最長連升 / 最長連降月數</span>
+                <span class="en">Max Rising / Falling Streak</span>
+              </span>
+              <span class="metric-val" style="font-size:0.9rem;">
+                <span class="val-up">▲ ${st.maxUpStreak}<span class="zh">月</span><span class="en">M</span></span> · 
+                <span class="val-down">▼ ${st.maxDownStreak}<span class="zh">月</span><span class="en">M</span></span>
+              </span>
+            </div>
+
+            <div class="metric-box">
+              <span class="metric-label">
+                <span class="zh">期間最低 ~ 最高極值</span>
+                <span class="en">Period Min ~ Max Range</span>
+              </span>
+              <span class="metric-val" style="font-size:0.9rem;">
+                ${st.minVal.toFixed(2)}${valUnit} ~ <strong>${st.maxVal.toFixed(2)}${valUnit}</strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="duration-bar-container">
+            <div class="duration-bar">
+              <div class="bar-seg-up" style="width: ${st.aboveRatio}%;"></div>
+              <div class="bar-seg-down" style="width: ${st.belowRatio}%;"></div>
+            </div>
+            <div class="bar-legend">
+              <div class="legend-item">
+                <span class="legend-dot" style="background:var(--tw-up)"></span>
+                <span class="zh">${isCPI ? '≥2.0% 通膨區' : '≥50 景氣擴張'}: ${st.aboveBenchmarkCount}個月 (${st.aboveRatio.toFixed(0)}%)</span>
+                <span class="en">${isCPI ? '≥2.0% Target' : '≥50 Expansion'}: ${st.aboveBenchmarkCount}M (${st.aboveRatio.toFixed(0)}%)</span>
+              </div>
+              <div class="legend-item">
+                <span class="legend-dot" style="background:var(--tw-down)"></span>
+                <span class="zh">${isCPI ? '<2.0% 溫和區' : '<50 景氣緊縮'}: ${st.belowBenchmarkCount}個月 (${st.belowRatio.toFixed(0)}%)</span>
+                <span class="en">${isCPI ? '<2.0% Benign' : '<50 Contraction'}: ${st.belowBenchmarkCount}M (${st.belowRatio.toFixed(0)}%)</span>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderMacroCanvasChart(canvasId, wrapperId, categoryFilter, benchmarkVal, benchmarkLabelZh, benchmarkLabelEn) {
+      const canvas = document.getElementById(canvasId);
+      const wrapper = document.getElementById(wrapperId);
+      if (!canvas || !wrapper) return;
+      const rect = wrapper.getBoundingClientRect();
+      if (rect.width === 0 || rect.height === 0) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      const ctx = canvas.getContext("2d");
+      ctx.scale(dpr, dpr);
+
+      const width = rect.width;
+      const height = rect.height;
+      const padding = { top: 25, right: 105, bottom: 40, left: 50 };
+
+      ctx.clearRect(0, 0, width, height);
+
+      const activeCodes = macroState.selectedSeries.filter(c => MACRO_INDICATORS[c] && MACRO_INDICATORS[c].category === categoryFilter);
+      if (activeCodes.length === 0) {
+        ctx.fillStyle = "#94a3b8";
+        ctx.font = "13px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(
+          state.lang === "zh" ? `請勾選至少一項 ${categoryFilter} 指標以顯示趨勢圖` : `Select at least one ${categoryFilter} series to display chart`,
+          width / 2,
+          height / 2
+        );
+        return;
+      }
+
+      let minVal = benchmarkVal;
+      let maxVal = benchmarkVal;
+      const seriesList = [];
+      let months = [];
+
+      activeCodes.forEach(code => {
+        const pts = getMacroFilteredSeries(code);
+        if (pts.length > 0 && months.length === 0) {
+          months = pts.map(p => p.month);
+        }
+        pts.forEach(p => {
+          if (p.value < minVal) minVal = p.value;
+          if (p.value > maxVal) maxVal = p.value;
+        });
+        seriesList.push({
+          code,
+          meta: MACRO_INDICATORS[code],
+          pts
+        });
+      });
+
+      const span = (maxVal - minVal) || 2;
+      const yMin = minVal - span * 0.15;
+      const yMax = maxVal + span * 0.15;
+
+      const plotW = width - padding.left - padding.right;
+      const plotH = height - padding.top - padding.bottom;
+
+      function getX(idx) {
+        if (months.length <= 1) return padding.left + plotW / 2;
+        return padding.left + (idx / (months.length - 1)) * plotW;
+      }
+
+      function getY(v) {
+        return padding.top + plotH - ((v - yMin) / (yMax - yMin)) * plotH;
+      }
+
+      // Grid lines
+      const gridColor = state.theme === "dark" ? "rgba(148, 163, 184, 0.12)" : "rgba(100, 116, 139, 0.15)";
+      const axisColor = state.theme === "dark" ? "#64748b" : "#94a3b8";
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = gridColor;
+      ctx.fillStyle = axisColor;
+      ctx.font = "10px sans-serif";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+
+      const steps = 5;
+      for (let s = 0; s <= steps; s++) {
+        const v = yMin + (s / steps) * (yMax - yMin);
+        const y = getY(v);
+        ctx.beginPath();
+        ctx.moveTo(padding.left, y);
+        ctx.lineTo(width - padding.right, y);
+        ctx.stroke();
+
+        const lbl = categoryFilter === "CPI" ? `${v.toFixed(1)}%` : v.toFixed(1);
+        ctx.fillText(lbl, padding.left - 8, y);
+      }
+
+      // Benchmark threshold dashed line (2.0% for CPI, 50.0 for PMI)
+      if (benchmarkVal >= yMin && benchmarkVal <= yMax) {
+        const by = getY(benchmarkVal);
+        ctx.strokeStyle = categoryFilter === "CPI" ? "rgba(245, 158, 11, 0.75)" : "rgba(244, 63, 94, 0.75)";
+        ctx.lineWidth = 1.8;
+        ctx.setLineDash([5, 4]);
+        ctx.beginPath();
+        ctx.moveTo(padding.left, by);
+        ctx.lineTo(width - padding.right, by);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = categoryFilter === "CPI" ? "#f59e0b" : "#f43f5e";
+        ctx.font = "bold 10px sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText(state.lang === "zh" ? benchmarkLabelZh : benchmarkLabelEn, padding.left + 6, by - 8);
+      }
+
+      // X-axis labels
+      ctx.fillStyle = axisColor;
+      ctx.font = "10px sans-serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "top";
+      const stepIdx = Math.max(1, Math.floor(months.length / 6));
+      for (let i = 0; i < months.length; i += stepIdx) {
+        ctx.fillText(months[i], getX(i), height - padding.bottom + 8);
+      }
+
+      // Series lines and dots
+      seriesList.forEach(s => {
+        ctx.strokeStyle = s.meta.color;
+        ctx.lineWidth = 2.4;
+        ctx.lineJoin = "round";
+        ctx.beginPath();
+        s.pts.forEach((p, idx) => {
+          const x = getX(idx);
+          const y = getY(p.value);
+          if (idx === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+
+        s.pts.forEach((p, idx) => {
+          const x = getX(idx);
+          const y = getY(p.value);
+          ctx.fillStyle = s.meta.color;
+          ctx.beginPath();
+          ctx.arc(x, y, idx === s.pts.length - 1 ? 4.2 : 2.5, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        const lastPt = s.pts[s.pts.length - 1];
+        const lx = getX(s.pts.length - 1);
+        const ly = getY(lastPt.value);
+        ctx.fillStyle = s.meta.color;
+        ctx.font = "bold 11px sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        const unitStr = categoryFilter === "CPI" ? "%" : "";
+        ctx.fillText(` ${s.meta.code} (${lastPt.value.toFixed(1)}${unitStr})`, lx + 5, ly);
+      });
+    }
+
+    function renderMacroComparisonTable() {
+      const thead = document.querySelector("#macroComparisonTable thead tr");
+      const tbody = document.getElementById("macroComparisonTableBody");
+      if (!thead || !tbody) return;
+
+      while (thead.children.length > 1) {
+        thead.removeChild(thead.lastChild);
+      }
+      tbody.innerHTML = "";
+
+      macroState.selectedSeries.forEach(code => {
+        const item = MACRO_INDICATORS[code];
+        const th = document.createElement("th");
+        th.style.color = item.color;
+        th.innerHTML = `
+          <div>${item.code}</div>
+          <div style="font-size:0.72rem;">
+            <span class="zh">${item.nameZh}</span>
+            <span class="en">${item.nameEn}</span>
+          </div>
+        `;
+        thead.appendChild(th);
+      });
+
+      const statsMap = {};
+      macroState.selectedSeries.forEach(c => {
+        statsMap[c] = calculateMacroStats(c);
+      });
+
+      const rows = [
+        {
+          zh: "國家地區與指標類別",
+          en: "Region & Indicator Type",
+          render: (s) => `<strong>${s.meta.region}</strong> · ${s.meta.category} (${s.meta.unit})`
+        },
+        {
+          zh: "最新公布數值",
+          en: "Latest Reading",
+          render: (s) => {
+            const u = s.meta.category === "CPI" ? "%" : "";
+            return `<strong>${s.latestVal.toFixed(2)}${u}</strong> (${s.endMonth})`;
+          }
+        },
+        {
+          zh: "較上月變動 (MoM Diff)",
+          en: "MoM Change",
+          render: (s) => {
+            const u = s.meta.category === "CPI" ? "%" : "";
+            const cls = s.momDiff > 0 ? "val-up" : (s.momDiff < 0 ? "val-down" : "");
+            const sign = s.momDiff > 0 ? "+" : "";
+            return `<span class="${cls}">${sign}${s.momDiff.toFixed(2)}${u}</span>`;
+          }
+        },
+        {
+          zh: "觀察期間起訖變動",
+          en: "Period Start → Latest",
+          render: (s) => {
+            const u = s.meta.category === "CPI" ? "%" : "";
+            return `${s.startVal.toFixed(2)}${u} → <strong>${s.latestVal.toFixed(2)}${u}</strong>`;
+          }
+        },
+        {
+          zh: "關鍵參考基準線",
+          en: "Reference Benchmark",
+          render: (s) => s.meta.category === "CPI" ? `2.0% <span class="zh">(央行目標)</span><span class="en">(Target)</span>` : `50.0 <span class="zh">(榮枯線)</span><span class="en">(Threshold)</span>`
+        },
+        {
+          zh: "高於基準線月數 (比例)",
+          en: "Months ≥ Benchmark (%)",
+          render: (s) => `<span class="val-up">${s.aboveBenchmarkCount} <span class="zh">個月</span><span class="en">M</span> (${s.aboveRatio.toFixed(1)}%)</span>`
+        },
+        {
+          zh: "低於基準線月數 (比例)",
+          en: "Months < Benchmark (%)",
+          render: (s) => `<span class="val-down">${s.belowBenchmarkCount} <span class="zh">個月</span><span class="en">M</span> (${s.belowRatio.toFixed(1)}%)</span>`
+        },
+        {
+          zh: "最長連續上升月數",
+          en: "Max Consecutive Rising Months",
+          render: (s) => `<span class="val-up">▲ <strong>${s.maxUpStreak}</strong> <span class="zh">個月</span><span class="en">Months</span></span>`
+        },
+        {
+          zh: "最長連續下降月數",
+          en: "Max Consecutive Falling Months",
+          render: (s) => `<span class="val-down">▼ <strong>${s.maxDownStreak}</strong> <span class="zh">個月</span><span class="en">Months</span></span>`
+        },
+        {
+          zh: "期間最高 ~ 最低極值",
+          en: "Period Min ~ Max",
+          render: (s) => {
+            const u = s.meta.category === "CPI" ? "%" : "";
+            return `${s.minVal.toFixed(2)}${u} ~ ${s.maxVal.toFixed(2)}${u}`;
+          }
+        }
+      ];
+
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+        let html = `
+          <td>
+            <span class="zh">${r.zh}</span>
+            <span class="en">${r.en}</span>
+          </td>
+        `;
+        macroState.selectedSeries.forEach(code => {
+          const st = statsMap[code];
+          html += `<td>${st ? r.render(st) : '-'}</td>`;
+        });
+        tr.innerHTML = html;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderMacroHistoryTable() {
+      const tbody = document.getElementById("macroHistoryTableBody");
+      if (!tbody) return;
+      tbody.innerHTML = "";
+
+      const total = MACRO_MONTHS.length;
+      const count = Math.min(total, macroState.horizonMonths);
+      const startIdx = total - count;
+
+      for (let i = total - 1; i >= startIdx; i--) {
+        const m = MACRO_MONTHS[i];
+        const usCpi = MACRO_INDICATORS["US_CPI"].values[i];
+        const usCore = MACRO_INDICATORS["US_CORE_CPI"].values[i];
+        const twCpi = MACRO_INDICATORS["TW_CPI"].values[i];
+        const usPmi = MACRO_INDICATORS["US_ISM_PMI"].values[i];
+        const usNmi = MACRO_INDICATORS["US_ISM_NMI"].values[i];
+        const twPmi = MACRO_INDICATORS["TW_PMI"].values[i];
+
+        const bothExpanding = usPmi >= 50.0 && twPmi >= 50.0;
+        const cpiMod = usCpi <= 2.4 && twCpi <= 2.0;
+
+        let noteZh = "", noteEn = "", badgeCls = "badge-flat";
+        if (bothExpanding && cpiMod) {
+          noteZh = "🌟 美台製造業同步擴張 · 通膨溫和";
+          noteEn = "🌟 US & TW PMI Expansion · Benign CPI";
+          badgeCls = "badge-up";
+        } else if (bothExpanding) {
+          noteZh = "🔥 景氣擴張強勁 · 關注物價黏著度";
+          noteEn = "🔥 Solid PMI Expansion · Watch Sticky CPI";
+          badgeCls = "badge-up";
+        } else {
+          noteZh = "⚖️ 製造業調整期 · 服務業支撐";
+          noteEn = "⚖️ Manufacturing Transition · Services Resilient";
+          badgeCls = "badge-flat";
+        }
+
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><strong>${m}</strong></td>
+          <td class="${usCpi > 2.5 ? 'val-up' : 'val-down'}"><strong>${usCpi.toFixed(1)}%</strong></td>
+          <td>${usCore.toFixed(1)}%</td>
+          <td class="${twCpi > 2.0 ? 'val-up' : 'val-down'}"><strong>${twCpi.toFixed(2)}%</strong></td>
+          <td class="${usPmi >= 50 ? 'val-up' : 'val-down'}"><strong>${usPmi.toFixed(1)}</strong></td>
+          <td class="${usNmi >= 50 ? 'val-up' : 'val-down'}">${usNmi.toFixed(1)}</td>
+          <td class="${twPmi >= 50 ? 'val-up' : 'val-down'}"><strong>${twPmi.toFixed(1)}</strong></td>
+          <td>
+            <span class="streak-badge ${badgeCls}">
+              <span class="zh">${noteZh}</span>
+              <span class="en">${noteEn}</span>
+            </span>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+    }
+
+    function exportMacroCSV() {
+      let csv = "\uFEFFMonth,US_CPI_YoY_%,US_Core_CPI_YoY_%,TW_CPI_YoY_%,US_ISM_Mfg_PMI,US_ISM_Services_PMI,TW_Mfg_PMI\n";
+      const total = MACRO_MONTHS.length;
+      const count = Math.min(total, macroState.horizonMonths);
+      const startIdx = total - count;
+
+      for (let i = startIdx; i < total; i++) {
+        csv += `${MACRO_MONTHS[i]},${MACRO_INDICATORS["US_CPI"].values[i]},${MACRO_INDICATORS["US_CORE_CPI"].values[i]},${MACRO_INDICATORS["TW_CPI"].values[i]},${MACRO_INDICATORS["US_ISM_PMI"].values[i]},${MACRO_INDICATORS["US_ISM_NMI"].values[i]},${MACRO_INDICATORS["TW_PMI"].values[i]}\n`;
+      }
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `US_TW_Macro_CPI_PMI_Report_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    function updateMacroViews() {
+      renderMacroRegimeOverview();
+      renderMacroSummaryCards();
+      renderMacroCanvasChart("cpiCanvas", "cpiCanvasWrapper", "CPI", 2.0, "2.0% 央行目標線", "2.0% Target");
+      renderMacroCanvasChart("pmiCanvas", "pmiCanvasWrapper", "PMI", 50.0, "50.0 景氣榮枯線", "50.0 Threshold");
+      renderMacroComparisonTable();
+      renderMacroHistoryTable();
+    }
+
+    function switchPageTab(tabName) {
+      macroState.activeTab = tabName;
+      const viewStocks = document.getElementById("viewStocks");
+      const viewMacro = document.getElementById("viewMacro");
+      const btnStocks = document.getElementById("tabBtnStocks");
+      const btnMacro = document.getElementById("tabBtnMacro");
+
+      if (tabName === "macro") {
+        viewStocks.classList.add("hidden");
+        viewMacro.classList.remove("hidden");
+        btnStocks.classList.remove("active");
+        btnMacro.classList.add("active");
+        updateMacroViews();
+      } else {
+        viewMacro.classList.add("hidden");
+        viewStocks.classList.remove("hidden");
+        btnMacro.classList.remove("active");
+        btnStocks.classList.add("active");
+        updateAllViews();
+      }
+    }
+
     function updateAllViews() {
+      if (typeof macroState !== 'undefined' && macroState.activeTab === 'macro') {
+        updateMacroViews();
+      }
       renderMarketDecomposition();
       const metricsMap = computeAllCurrentMetrics();
       renderSummaryCards(metricsMap);
@@ -2663,14 +3948,68 @@
 
       document.getElementById("btnExportCSV").addEventListener("click", exportToCSV);
 
+      // Page Tab Navigation Listeners
+      const tabBtnStocks = document.getElementById("tabBtnStocks");
+      const tabBtnMacro = document.getElementById("tabBtnMacro");
+      if (tabBtnStocks && tabBtnMacro) {
+        tabBtnStocks.addEventListener("click", () => switchPageTab("stocks"));
+        tabBtnMacro.addEventListener("click", () => switchPageTab("macro"));
+      }
+
+      // Macro Filter Buttons
+      const btnMacroAll = document.getElementById("btnMacroAll");
+      const btnMacroCPIOnly = document.getElementById("btnMacroCPIOnly");
+      const btnMacroPMIOnly = document.getElementById("btnMacroPMIOnly");
+      if (btnMacroAll) {
+        btnMacroAll.addEventListener("click", () => {
+          macroState.selectedSeries = ["US_CPI", "US_CORE_CPI", "TW_CPI", "US_ISM_PMI", "US_ISM_NMI", "TW_PMI"];
+          renderMacroChips();
+          updateMacroViews();
+        });
+      }
+      if (btnMacroCPIOnly) {
+        btnMacroCPIOnly.addEventListener("click", () => {
+          macroState.selectedSeries = ["US_CPI", "US_CORE_CPI", "TW_CPI"];
+          renderMacroChips();
+          updateMacroViews();
+        });
+      }
+      if (btnMacroPMIOnly) {
+        btnMacroPMIOnly.addEventListener("click", () => {
+          macroState.selectedSeries = ["US_ISM_PMI", "US_ISM_NMI", "TW_PMI"];
+          renderMacroChips();
+          updateMacroViews();
+        });
+      }
+
+      document.querySelectorAll("#macroHorizonButtons .btn-period").forEach(btn => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll("#macroHorizonButtons .btn-period").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          macroState.horizonMonths = parseInt(btn.dataset.months, 10) || 24;
+          updateMacroViews();
+        });
+      });
+
+      const btnExportMacroCSV = document.getElementById("btnExportMacroCSV");
+      if (btnExportMacroCSV) {
+        btnExportMacroCSV.addEventListener("click", exportMacroCSV);
+      }
+
+
       window.addEventListener("resize", () => {
-        renderStockChart(computeAllCurrentMetrics());
+        if (macroState.activeTab === "macro") {
+          updateMacroViews();
+        } else {
+          renderStockChart(computeAllCurrentMetrics());
+        }
       });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
       updateLanguageUI();
       renderCompanyChips();
+      renderMacroChips();
       initListeners();
       applyPeriodDays(20);
       tryAutoFetchLocalData();

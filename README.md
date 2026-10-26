@@ -173,6 +173,18 @@ git push -u origin main
 | **NVDA** | US (USD) | **輝達 (NVIDIA)** | **NVIDIA** | AI 算力與 GPU 加速運算霸主 | `#84cc16` | **預設啟用** |
 | **GOOGL** | US (USD) | **Google (Alphabet)** | **Google (Alphabet)** | 雲端、搜尋與 Gemini AI 巨頭 | `#eab308` | **預設啟用** |
 
+### 🌐 總經景氣指標分頁：CPI 與 PMI 專頁 (Macro CPI & PMI Index Tab)
+頁面頂部內建雙分頁切換器（`台美股波段與大盤結構分析` ⇄ `總經景氣指標：CPI 與 PMI 專頁`），支援 6 項核心美台總經指標、24 個月趨勢圖、景氣四象限配置時鐘與 CSV 匯出：
+
+| 指標代號 | 區域/類別 | 中文名稱 | 英文名稱 | 關鍵榮枯/目標基準線 | 代表色 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **US_CPI** | US · CPI (%) | **美國 CPI 年增率** | **US Headline CPI YoY** | **2.0% (Fed 目標線)** | `#ef4444` |
+| **US_CORE_CPI** | US · CPI (%) | **美國核心 CPI 年增率** | **US Core CPI YoY** | **2.0% (Fed 核心目標)** | `#f97316` |
+| **TW_CPI** | TW · CPI (%) | **台灣 CPI 年增率** | **TW Headline CPI YoY** | **2.0% (央行通膨警戒線)** | `#eab308` |
+| **US_ISM_PMI** | US · PMI (Index) | **美國 ISM 製造業 PMI** | **US ISM Manufacturing PMI** | **50.0 (景氣榮枯分水嶺)** | `#38bdf8` |
+| **US_ISM_NMI** | US · PMI (Index) | **美國 ISM 服務業 PMI** | **US ISM Services PMI** | **50.0 (景氣榮枯分水嶺)** | `#6366f1` |
+| **TW_PMI** | TW · PMI (Index) | **台灣製造業 PMI (CIER)** | **TW Manufacturing PMI** | **50.0 (景氣榮枯分水嶺)** | `#10b981` |
+
 ---
 
 ## 5. 統計指標與計算公式 / Metrics & Formulas

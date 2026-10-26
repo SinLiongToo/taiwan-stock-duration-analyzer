@@ -27,6 +27,14 @@ checks = [
     ('TSM', 'TSMC ADR code'),
     ('NVDA', 'NVIDIA stock code'),
     ('GOOGL', 'Google Alphabet stock code'),
+    ('id="tabBtnStocks"', 'Stocks & TAIEX tab button'),
+    ('id="tabBtnMacro"', 'Macro CPI & PMI tab button'),
+    ('id="viewStocks"', 'Stocks tab view container'),
+    ('id="viewMacro"', 'Macro CPI & PMI tab view container'),
+    ('id="cpiCanvas"', 'CPI YoY% canvas chart'),
+    ('id="pmiCanvas"', 'PMI Index canvas chart'),
+    ('id="macroComparisonTable"', 'Macro CPI/PMI comparison matrix table'),
+    ('id="macroHistoryTable"', 'Macro CPI/PMI monthly history table'),
 ]
 
 for pattern, desc in checks:
