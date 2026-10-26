@@ -6,6 +6,7 @@ Zero external pip dependencies (Standard library only).
 Fetches from:
 1. Yahoo Finance API / TWSE Open Data (Daily Stock & ETF OHLCV)
    - Taiwan Big 5 (2330, 2454, 2317, 2382, 2308) & TAIEX (^TWII)
+   - US Major Indices: S&P 500 (^GSPC), PHLX Semiconductor (^SOX), Nasdaq (^IXIC), Dow Jones (^DJI)
    - US Stocks & ETFs (VT, VTI, BND, TSM, NVDA, GOOGL)
 2. U.S. Bureau of Labor Statistics (BLS) Official Public API v1 (Monthly CPI)
    - Series CUUR0000SA0 (US Headline CPI) & CUUR0000SA0L1E (US Core CPI)
@@ -46,6 +47,11 @@ SYMBOLS = {
     "2382": {"yahoo": "2382.TW", "market": "TW", "currency": "TWD", "nameZh": "廣達", "nameEn": "Quanta", "weight": 0.015, "color": "#f59e0b", "isDefault": False},
     "2308": {"yahoo": "2308.TW", "market": "TW", "currency": "TWD", "nameZh": "台達電", "nameEn": "Delta", "weight": 0.013, "color": "#10b981", "isDefault": False},
     "TAIEX": {"yahoo": "%5ETWII", "market": "TW", "currency": "Pts", "nameZh": "加權指數 (大盤)", "nameEn": "TAIEX", "weight": 1.0, "color": "#f43f5e", "isBenchmark": True, "isDefault": False},
+    # US Major Market Indices (S&P 500, PHLX Semiconductor SOX, Nasdaq, Dow Jones)
+    "SP500": {"yahoo": "%5EGSPC", "market": "US", "currency": "Pts", "nameZh": "標普 500 指數", "nameEn": "S&P 500 Index", "weight": 0.0, "color": "#f97316", "isBenchmark": True, "isDefault": True},
+    "SOX": {"yahoo": "%5ESOX", "market": "US", "currency": "Pts", "nameZh": "費城半導體指數", "nameEn": "PHLX Semiconductor (SOX)", "weight": 0.0, "color": "#ec4899", "isBenchmark": True, "isDefault": True},
+    "NASDAQ": {"yahoo": "%5EIXIC", "market": "US", "currency": "Pts", "nameZh": "那斯達克指數", "nameEn": "Nasdaq Composite", "weight": 0.0, "color": "#8b5cf6", "isBenchmark": True, "isDefault": True},
+    "DJI": {"yahoo": "%5EDJI", "market": "US", "currency": "Pts", "nameZh": "道瓊工業指數", "nameEn": "Dow Jones Industrial", "weight": 0.0, "color": "#06b6d4", "isBenchmark": True, "isDefault": False},
     # US Stocks & Global ETFs
     "VT": {"yahoo": "VT", "market": "US", "currency": "USD", "nameZh": "VT (全球股票ETF)", "nameEn": "Vanguard Total World ETF", "weight": 0.0, "color": "#0ea5e9", "isDefault": True},
     "VTI": {"yahoo": "VTI", "market": "US", "currency": "USD", "nameZh": "VTI (全美股票ETF)", "nameEn": "Vanguard Total Stock Market ETF", "weight": 0.0, "color": "#6366f1", "isDefault": True},
@@ -132,9 +138,10 @@ def fetch_bls_cpi_yoy(series_id):
             index_map = {}
             for item in raw_list:
                 period = item.get("period", "")
-                if period.startswith("M") and period != "M13":
+                val_str = str(item.get("value", "")).strip()
+                if period.startswith("M") and period != "M13" and val_str not in ("-", "", "None"):
                     ym = f"{item['year']}-{period[1:]}"
-                    index_map[ym] = float(item["value"])
+                    index_map[ym] = float(val_str)
             # 計算 YoY 年增率 (%) = (當月指數 - 去年同月指數) / 去年同月指數 * 100
             yoy_map = {}
             for ym, val in index_map.items():

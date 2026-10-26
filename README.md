@@ -1,6 +1,6 @@
 # 台美股波段漲跌天數與累積漲跌幅試算分析工具
 # Taiwan & US Stock Duration & Percentage Analyzer
-### 整合大盤加權指數 (TAIEX)、扣除五大權值股動態分析、美股與全球 ETF (VT/VTI/BND/TSM/NVDA/GOOGL)、GitHub Pages 部署與 Actions 自動更新排程
+### 整合大盤加權指數 (TAIEX)、扣除五大權值股動態分析、美股四大指數 (標普 500 / 費城半導體 SOX / 那斯達克 / 道瓊)、美股與全球 ETF (VT/VTI/BND/TSM/NVDA/GOOGL)、GitHub Pages 部署與 Actions 自動更新排程
 
 [![Generative UI Compliant](https://img.shields.io/badge/Generative_UI-Compliant-success?style=flat-square)](https://github.com)
 [![Offline Ready](https://img.shields.io/badge/Dependencies-Zero_Standalone-blue?style=flat-square)](https://github.com)
@@ -162,6 +162,14 @@ git push -u origin main
 | **2317** | TW (TWD) | **鴻海** | **Foxconn** | **4.2%** | `#a855f7` | 可選標的 |
 | **2382** | TW (TWD) | **廣達** | **Quanta** | **1.5%** | `#f59e0b` | 可選標的 |
 | **2308** | TW (TWD) | **台達電** | **Delta** | **1.3%** | `#10b981` | 可選標的 |
+
+### 📈 美股四大核心指數 (US Major Market Indices)
+| 標的代號 | Yahoo 代號 | 市場/單位 | 中文名稱 | 英文名稱 | 類別說明 | 代表色 | 預設狀態 |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **SP500** | `^GSPC` | US (Pts) | **標普 500 指數** | **S&P 500 Index** | 美國 500 大上市企業市值加權基準指數 | `#f97316` | **預設啟用** |
+| **SOX** | `^SOX` | US (Pts) | **費城半導體指數** | **PHLX Semiconductor (SOX)** | 全球半導體設計、設備與晶圓製造核心指標 | `#ec4899` | **預設啟用** |
+| **NASDAQ** | `^IXIC` | US (Pts) | **那斯達克指數** | **Nasdaq Composite** | 美國科技與高成長創新企業代表指數 | `#8b5cf6` | **預設啟用** |
+| **DJI** | `^DJI` | US (Pts) | **道瓊工業指數** | **Dow Jones Industrial** | 美國 30 大藍籌工業、金融與消費巨頭指數 | `#3b82f6` | 可選標的 |
 
 ### 🇺🇸 美股與全球 ETF (US Stocks & Global ETFs)
 | 標的代號 | 市場/幣別 | 中文名稱 | 英文名稱 | 類別說明 | 代表色 | 預設狀態 |
