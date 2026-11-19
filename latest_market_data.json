@@ -9,17 +9,10 @@
     "weight": 0.345,
     "isBenchmark": false,
     "isDefault": true,
-    "latestDate": "2026-11-18",
-    "latestClose": 2175.0,
+    "latestDate": "2026-11-19",
+    "latestClose": 2145.0,
     "count": 243,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 1405.0,
-        "high": 1435.0,
-        "low": 1405.0,
-        "volume": 42198432
-      },
       {
         "date": "2025-11-19",
         "close": 1395.0,
@@ -1712,7 +1705,14 @@
         "close": 2175.0,
         "high": 2210.0,
         "low": 2150.0,
-        "volume": 45159352
+        "volume": 42413873
+      },
+      {
+        "date": "2026-11-19",
+        "close": 2145.0,
+        "high": 2190.0,
+        "low": 2120.0,
+        "volume": 19143525
       }
     ]
   },
@@ -1726,17 +1726,10 @@
     "weight": 0.035,
     "isBenchmark": false,
     "isDefault": true,
-    "latestDate": "2026-11-18",
-    "latestClose": 3940.0,
+    "latestDate": "2026-11-19",
+    "latestClose": 3805.0,
     "count": 243,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 1170.0,
-        "high": 1220.0,
-        "low": 1170.0,
-        "volume": 9021735
-      },
       {
         "date": "2025-11-19",
         "close": 1160.0,
@@ -3429,7 +3422,14 @@
         "close": 3940.0,
         "high": 4075.0,
         "low": 3775.0,
-        "volume": 15897361
+        "volume": 15132611
+      },
+      {
+        "date": "2026-11-19",
+        "close": 3805.0,
+        "high": 4045.0,
+        "low": 3750.0,
+        "volume": 8610667
       }
     ]
   },
@@ -3443,17 +3443,10 @@
     "weight": 0.042,
     "isBenchmark": false,
     "isDefault": false,
-    "latestDate": "2026-11-18",
-    "latestClose": 221.0,
+    "latestDate": "2026-11-19",
+    "latestClose": 220.0,
     "count": 243,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 230.0,
-        "high": 237.0,
-        "low": 230.0,
-        "volume": 74877047
-      },
       {
         "date": "2025-11-19",
         "close": 229.0,
@@ -5146,7 +5139,14 @@
         "close": 221.0,
         "high": 224.5,
         "low": 215.0,
-        "volume": 40630186
+        "volume": 39482866
+      },
+      {
+        "date": "2026-11-19",
+        "close": 220.0,
+        "high": 225.5,
+        "low": 217.5,
+        "volume": 26199556
       }
     ]
   },
@@ -5160,17 +5160,10 @@
     "weight": 0.015,
     "isBenchmark": false,
     "isDefault": false,
-    "latestDate": "2026-11-18",
-    "latestClose": 265.0,
+    "latestDate": "2026-11-19",
+    "latestClose": 261.5,
     "count": 243,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 270.0,
-        "high": 278.5,
-        "low": 270.0,
-        "volume": 18467673
-      },
       {
         "date": "2025-11-19",
         "close": 267.0,
@@ -6863,7 +6856,14 @@
         "close": 265.0,
         "high": 266.5,
         "low": 253.0,
-        "volume": 22406652
+        "volume": 22123102
+      },
+      {
+        "date": "2026-11-19",
+        "close": 261.5,
+        "high": 266.0,
+        "low": 259.5,
+        "volume": 3608903
       }
     ]
   },
@@ -6877,17 +6877,10 @@
     "weight": 0.013,
     "isBenchmark": false,
     "isDefault": false,
-    "latestDate": "2026-11-18",
-    "latestClose": 1060.0,
+    "latestDate": "2026-11-19",
+    "latestClose": 1015.0,
     "count": 243,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 898.0,
-        "high": 930.0,
-        "low": 898.0,
-        "volume": 12776058
-      },
       {
         "date": "2025-11-19",
         "close": 894.0,
@@ -8580,7 +8573,14 @@
         "close": 1060.0,
         "high": 1100.0,
         "low": 1000.0,
-        "volume": 20729259
+        "volume": 20002510
+      },
+      {
+        "date": "2026-11-19",
+        "close": 1015.0,
+        "high": 1115.0,
+        "low": 1000.0,
+        "volume": 12992933
       }
     ]
   },
@@ -8594,17 +8594,10 @@
     "weight": 1.0,
     "isBenchmark": true,
     "isDefault": false,
-    "latestDate": "2026-11-18",
-    "latestClose": 40194.91,
+    "latestDate": "2026-11-19",
+    "latestClose": 39026.46,
     "count": 242,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 26756.12,
-        "high": 27310.4,
-        "low": 26756.12,
-        "volume": 5433000
-      },
       {
         "date": "2025-11-19",
         "close": 26580.12,
@@ -10290,6 +10283,13 @@
         "close": 40194.91,
         "high": 40938.2,
         "low": 39260.99,
+        "volume": 4771900
+      },
+      {
+        "date": "2026-11-19",
+        "close": 39026.46,
+        "high": 40315.53,
+        "low": 38694.93,
         "volume": 0
       }
     ]
@@ -10305,16 +10305,9 @@
     "isBenchmark": true,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 7345.42,
-    "count": 252,
+    "latestClose": 7323.63,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 6617.32,
-        "high": 6666.63,
-        "low": 6574.32,
-        "volume": 5159390000
-      },
       {
         "date": "2025-11-19",
         "close": 6642.16,
@@ -12067,10 +12060,10 @@
       },
       {
         "date": "2026-11-18",
-        "close": 7345.42,
+        "close": 7323.63,
         "high": 7367.68,
-        "low": 7303.22,
-        "volume": 489966219
+        "low": 7285.76,
+        "volume": 3056907000
       }
     ]
   },
@@ -12085,16 +12078,9 @@
     "isBenchmark": true,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 9681.91,
-    "count": 252,
+    "latestClose": 9652.8,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 6551.03,
-        "high": 6651.59,
-        "low": 6479.68,
-        "volume": 0
-      },
       {
         "date": "2025-11-19",
         "close": 6670.03,
@@ -13847,9 +13833,9 @@
       },
       {
         "date": "2026-11-18",
-        "close": 9681.91,
+        "close": 9652.8,
         "high": 9828.19,
-        "low": 9498.39,
+        "low": 9493.93,
         "volume": 0
       }
     ]
@@ -13865,16 +13851,9 @@
     "isBenchmark": true,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 24471.41,
-    "count": 252,
+    "latestClose": 24429.88,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 22432.85,
-        "high": 22643.01,
-        "low": 22231.15,
-        "volume": 8606260000
-      },
       {
         "date": "2025-11-19",
         "close": 22564.23,
@@ -15627,10 +15606,10 @@
       },
       {
         "date": "2026-11-18",
-        "close": 24471.41,
+        "close": 24429.88,
         "high": 24538.78,
-        "low": 24268.03,
-        "volume": 1823059000
+        "low": 24225.3,
+        "volume": 7155171000
       }
     ]
   },
@@ -15645,16 +15624,9 @@
     "isBenchmark": true,
     "isDefault": false,
     "latestDate": "2026-11-18",
-    "latestClose": 50411.63,
-    "count": 252,
+    "latestClose": 50198.17,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 46091.74,
-        "high": 46382.92,
-        "low": 45913.6,
-        "volume": 596360000
-      },
       {
         "date": "2025-11-19",
         "close": 46138.77,
@@ -17407,10 +17379,10 @@
       },
       {
         "date": "2026-11-18",
-        "close": 50411.63,
+        "close": 50198.17,
         "high": 50637.7,
-        "low": 50210.49,
-        "volume": 146612557
+        "low": 50029.35,
+        "volume": 691469369
       }
     ]
   },
@@ -17425,16 +17397,9 @@
     "isBenchmark": false,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 150.45,
-    "count": 252,
+    "latestClose": 149.93,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 136.68,
-        "high": 137.44,
-        "low": 135.71,
-        "volume": 6751900
-      },
       {
         "date": "2025-11-19",
         "close": 136.82,
@@ -19187,10 +19152,10 @@
       },
       {
         "date": "2026-11-18",
-        "close": 150.45,
+        "close": 149.93,
         "high": 150.9,
-        "low": 149.7,
-        "volume": 561683
+        "low": 149.24,
+        "volume": 2498700
       }
     ]
   },
@@ -19205,16 +19170,9 @@
     "isBenchmark": false,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 360.64,
-    "count": 252,
+    "latestClose": 359.48,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 324.22,
-        "high": 326.55,
-        "low": 321.92,
-        "volume": 5563300
-      },
       {
         "date": "2025-11-19",
         "close": 325.28,
@@ -20963,14 +20921,14 @@
         "close": 360.19,
         "high": 364.1,
         "low": 357.74,
-        "volume": 4528800
+        "volume": 4541500
       },
       {
         "date": "2026-11-18",
-        "close": 360.64,
-        "high": 361.64,
-        "low": 358.5,
-        "volume": 528486
+        "close": 359.48,
+        "high": 361.67,
+        "low": 357.8,
+        "volume": 3470100
       }
     ]
   },
@@ -20985,16 +20943,9 @@
     "isBenchmark": false,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 70.78,
-    "count": 252,
+    "latestClose": 70.87,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 74.26,
-        "high": 74.38,
-        "low": 74.18,
-        "volume": 8009200
-      },
       {
         "date": "2025-11-19",
         "close": 74.23,
@@ -22747,10 +22698,10 @@
       },
       {
         "date": "2026-11-18",
-        "close": 70.78,
-        "high": 70.87,
+        "close": 70.87,
+        "high": 70.91,
         "low": 70.74,
-        "volume": 915967
+        "volume": 8559700
       }
     ]
   },
@@ -22765,16 +22716,9 @@
     "isBenchmark": false,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 363.02,
-    "count": 252,
+    "latestClose": 362.62,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 277.91,
-        "high": 280.19,
-        "low": 272.72,
-        "volume": 11850400
-      },
       {
         "date": "2025-11-19",
         "close": 282.37,
@@ -24523,14 +24467,14 @@
         "close": 359.69,
         "high": 373.1,
         "low": 353.5,
-        "volume": 25012000
+        "volume": 25241300
       },
       {
         "date": "2026-11-18",
-        "close": 363.02,
+        "close": 362.62,
         "high": 368.85,
         "low": 356.77,
-        "volume": 3871655
+        "volume": 12014100
       }
     ]
   },
@@ -24545,16 +24489,9 @@
     "isBenchmark": false,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 155.13,
-    "count": 252,
+    "latestClose": 150.96,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 181.36,
-        "high": 184.8,
-        "low": 179.65,
-        "volume": 213598900
-      },
       {
         "date": "2025-11-19",
         "close": 186.52,
@@ -26303,14 +26240,14 @@
         "close": 155.46,
         "high": 158.19,
         "low": 150.33,
-        "volume": 398625600
+        "volume": 406985100
       },
       {
         "date": "2026-11-18",
-        "close": 155.13,
+        "close": 150.96,
         "high": 159.7,
-        "low": 153.26,
-        "volume": 93053138
+        "low": 150.4,
+        "volume": 345169600
       }
     ]
   },
@@ -26325,16 +26262,9 @@
     "isBenchmark": false,
     "isDefault": true,
     "latestDate": "2026-11-18",
-    "latestClose": 283.49,
-    "count": 252,
+    "latestClose": 282.44,
+    "count": 251,
     "data": [
-      {
-        "date": "2025-11-18",
-        "close": 284.28,
-        "high": 288.8,
-        "low": 278.2,
-        "volume": 49158700
-      },
       {
         "date": "2025-11-19",
         "close": 292.81,
@@ -28083,19 +28013,19 @@
         "close": 280.2,
         "high": 284.09,
         "low": 278.46,
-        "volume": 31998600
+        "volume": 32175900
       },
       {
         "date": "2026-11-18",
-        "close": 283.49,
-        "high": 284.96,
-        "low": 281.41,
-        "volume": 4150273
+        "close": 282.44,
+        "high": 284.97,
+        "low": 279.69,
+        "volume": 27190700
       }
     ]
   },
   "__MACRO_DATA__": {
-    "lastUpdated": "2026-11-18 15:06",
+    "lastUpdated": "2026-11-19 02:44",
     "months": [
       "2024-10",
       "2024-11",
